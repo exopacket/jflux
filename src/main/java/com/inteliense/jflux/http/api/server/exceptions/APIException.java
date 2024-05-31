@@ -1,6 +1,6 @@
 package com.inteliense.jflux.http.api.server.exceptions;
 
-import org.extendedweb.aloft.utils.exceptions.types.ExceptionAdapter;
+import com.inteliense.jflux.exceptions.types.ExceptionAdapter;
 
 public class APIException extends ExceptionAdapter {
 

@@ -1,9 +1,9 @@
 package com.inteliense.jflux.threading;
 
-import org.extendedweb.aloft.server.base.threading.base.ThreadImpl;
-import org.extendedweb.aloft.server.base.threading.types.DetachedThread;
-import org.extendedweb.aloft.server.base.threading.types.JoinedThread;
-import org.extendedweb.aloft.utils.global.__;
+import com.inteliense.jflux.threading.base.ThreadImpl;
+import com.inteliense.jflux.threading.types.DetachedThread;
+import com.inteliense.jflux.threading.types.JoinedThread;
+import com.inteliense.jflux.todash.__;
 
 import java.util.ArrayList;
 
@@ -55,7 +55,7 @@ public class ThreadGroup {
         if(mainThread && joinContainer) {
             Runtime.getRuntime().addShutdownHook(new Thread() {
                 public void run() {
-                    __.printPrettyLn("Shutting down all application threads...", __.ANSI_YELLOW);
+                    __.Console.println("Shutting down all application threads...", __.TextColor.YELLOW);
                     stopGroup();
                 }
             });

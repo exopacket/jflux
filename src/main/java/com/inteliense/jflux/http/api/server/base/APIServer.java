@@ -1,19 +1,19 @@
 package com.inteliense.jflux.http.api.server.base;
 
-import com.inteliense.zeta.server.config.APIServerConfig;
-import com.inteliense.zeta.server.containers.*;
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.server.impl.ClientFilter;
-import com.inteliense.zeta.server.resources.APIResource;
-import com.inteliense.zeta.server.resources.APIResources;
-import com.inteliense.zeta.server.types.APIServerType;
-import com.inteliense.zeta.server.types.ContentType;
-import com.inteliense.zeta.types.ZeroTrustRequestType;
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.JSON;
-import com.inteliense.zeta.utils.RSA;
-import com.inteliense.zeta.utils.SHA;
+import com.inteliense.jflux.http.api.server.config.APIServerConfig;
+import com.inteliense.jflux.http.api.server.containers.*;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.server.impl.ClientFilter;
+import com.inteliense.jflux.http.api.server.resources.APIResource;
+import com.inteliense.jflux.http.api.server.resources.APIResources;
+import com.inteliense.jflux.http.api.server.types.APIServerType;
+import com.inteliense.jflux.http.api.server.types.ContentType;
+import com.inteliense.jflux.http.api.types.ZeroTrustRequestType;
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.JSON;
+import com.inteliense.jflux.http.api.utils.RSA;
+import com.inteliense.jflux.http.api.utils.SHA;
 import com.sun.net.httpserver.*;
 import org.json.simple.JSONObject;
 

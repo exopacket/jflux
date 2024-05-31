@@ -1,8 +1,8 @@
 package com.inteliense.jflux.http.api.base.endpoints;
 
-import com.inteliense.zeta.api.endpoints.expectations.ApiExpectations;
-import com.inteliense.zeta.api.endpoints.permissions.ApiEndpointPermissions;
-import com.inteliense.zeta.server.types.RequestType;
+import com.inteliense.jflux.http.api.base.endpoints.expectations.ApiExpectations;
+import com.inteliense.jflux.http.api.base.endpoints.permissions.ApiEndpointPermissions;
+import com.inteliense.jflux.http.api.server.types.RequestType;
 
 public abstract class ApiEndpoint {
 

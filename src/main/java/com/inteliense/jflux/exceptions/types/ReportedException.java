@@ -1,6 +1,7 @@
 package com.inteliense.jflux.exceptions.types;
 
-import org.extendedweb.aloft.utils.exceptions.reporting.ErrorReporter;
+
+import com.inteliense.jflux.exceptions.reporting.ErrorReporter;
 
 public class ReportedException extends ExceptionAdapter {
 

@@ -1,9 +1,9 @@
 package com.inteliense.jflux.db.supporting;
 
 import com.inteliense.jflux.db.supporting.sql.Field;
+import com.inteliense.jflux.db.supporting.sql.Record;
 import com.inteliense.jflux.db.supporting.sql.SQLColumnOrFunction;
-import org.extendedweb.aloft.lib.model.AloftModelCollection;
-import org.extendedweb.aloft.utils.exceptions.types.CriticalException;
+import com.inteliense.jflux.exceptions.types.CriticalException;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -41,10 +41,6 @@ public class QueryResults {
 
     public int size() {
         return records.size();
-    }
-
-    public AloftModelCollection modelResults() {
-        return null;
     }
 
 }

@@ -370,7 +370,7 @@ public class SQLBuilder {
     }
 
     private static String cleanQuery(String sql) {
-        return sql.replaceAll("\s+", " ").replaceAll("\s$", "");
+        return sql.replaceAll("\\s+", " ").replaceAll("\\s$", "");
     }
 
 }

@@ -1,9 +1,9 @@
 package com.inteliense.jflux.http.api.server.encryption;
 
-import com.inteliense.zeta.utils.AES;
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.Random;
-import com.inteliense.zeta.utils.SHA;
+import com.inteliense.jflux.http.api.utils.AES;
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.Random;
+import com.inteliense.jflux.http.api.utils.SHA;
 
 public class APIKeyPair {
 

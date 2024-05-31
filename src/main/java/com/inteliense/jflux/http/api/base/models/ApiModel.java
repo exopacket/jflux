@@ -1,8 +1,9 @@
 package com.inteliense.jflux.http.api.base.models;
 
-import com.inteliense.zeta.api.prereqs.ApiService;
-import com.inteliense.zeta.utils.SHA;
-import org.extendedweb.aloft.utils.encryption.A32;
+import com.inteliense.jflux.crypto.builtin.SHA;
+import com.inteliense.jflux.encoding.A32;
+import com.inteliense.jflux.http.api.base.prereqs.ApiService;
+
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public abstract class ApiModel {
         this.modelName = modelName;
         String key = SHA.getHmac384(this.modelName, service.getAppKey());
         assert key != null;
-        this.modelId = A32.casified(key);
+        this.modelId = A32.get(key);
         ArrayList<Class<? extends ApiModelField>> list = build(new ArrayList<>());
         Class<?>[] fields = new Class<?>[list.size()];
         list.toArray(fields);

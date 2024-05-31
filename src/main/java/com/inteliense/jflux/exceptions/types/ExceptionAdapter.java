@@ -1,6 +1,6 @@
 package com.inteliense.jflux.exceptions.types;
 
-import org.extendedweb.aloft.utils.data.JSON;
+import com.inteliense.jflux.json.JSON;
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;

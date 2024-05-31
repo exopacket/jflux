@@ -36,9 +36,9 @@ public class MysqlConnection extends DbConnection implements ExecutesQueries  {
     @Override
     protected void connect() throws Exception, CriticalException {
 
-        String jdbc = "jdbc:mysql://" + details.get("host").get() + ":" + details.get("port").get() + "/" + details.get("name").get();
+        String jdbc = "jdbc:mysql://" + details.get("host") + ":" + details.get("port") + "/" + details.get("name");
 
-        conn = DriverManager.getConnection(jdbc, details.get("username").get(), details.get("password").get());
+        conn = DriverManager.getConnection(jdbc, details.get("username"), details.get("password"));
         if(conn == null) throw new CriticalException("Failed to connect to mysql.");
 
     }

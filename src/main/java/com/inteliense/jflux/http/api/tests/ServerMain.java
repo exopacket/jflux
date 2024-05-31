@@ -1,13 +1,13 @@
 package com.inteliense.jflux.http.api.tests;
 
-import com.inteliense.zeta.server.*;
-import com.inteliense.zeta.server.config.APIServerConfig;
-import com.inteliense.zeta.server.containers.*;
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.server.resources.APIResource;
-import com.inteliense.zeta.server.types.APIServerType;
-import com.inteliense.zeta.server.types.CORSPolicy;
+import com.inteliense.jflux.http.api.server.*;
+import com.inteliense.jflux.http.api.server.config.APIServerConfig;
+import com.inteliense.jflux.http.api.server.containers.*;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.server.resources.APIResource;
+import com.inteliense.jflux.http.api.server.types.APIServerType;
+import com.inteliense.jflux.http.api.server.types.CORSPolicy;
 import org.json.simple.JSONObject;
 
 public class ServerMain {
@@ -32,7 +32,7 @@ public class ServerMain {
         System.out.println("API KEY = " + API_KEY);
         System.out.println("SECRET = " + API_SECRET);
 
-        API api = new API(config) {
+        API api = new API(config, null) {
 
             @Override
             public APIKeyPair lookupApiKey(String apiKey) {

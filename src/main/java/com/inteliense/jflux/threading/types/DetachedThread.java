@@ -1,6 +1,7 @@
 package com.inteliense.jflux.threading.types;
 
-import org.extendedweb.aloft.server.base.threading.base.DetachesThread;
+
+import com.inteliense.jflux.threading.base.DetachesThread;
 
 public abstract class DetachedThread extends DetachesThread {
 

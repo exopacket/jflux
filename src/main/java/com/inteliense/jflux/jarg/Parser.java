@@ -1,18 +1,18 @@
-package com.inteliense.jflux.jarg.commands.base;
+package com.inteliense.jflux.jarg;
 
 import java.util.ArrayList;
 
 public class Parser {
 
-    public static Arg[] getArgs(String[] args) {
+    public static Arg[] getArgs(String[] args, Keywords keywords) {
         ArrayList<Arg> argList = new ArrayList<>();
         boolean needValue = false;
         int prevFlagIndex = -1;
         String prevName = "";
         for(int i=0; i<args.length; i++) {
             String arg = args[i];
-            if(flagCheck(arg) && Keywords.flagExists(args[0], arg)) {
-                Arg flag = Keywords.getFlagArg(arg);
+            if(flagCheck(arg) && keywords.flagExists(args[0], arg)) {
+                Arg flag = keywords.getFlagArg(arg);
                 if(flag == null) continue;
                 argList.add(flag);
                 if(flag.requiresValue()) prevFlagIndex = argList.size() - 1;
@@ -29,8 +29,8 @@ public class Parser {
                 needValue = false;
                 continue;
             }
-            if(!flagCheck(arg) && Keywords.exists(arg)) {
-                needValue = Keywords.requiresValue(arg);
+            if(!flagCheck(arg) && keywords.exists(arg)) {
+                needValue = keywords.requiresValue(arg);
                 prevName = (needValue) ? arg : "";
                 if(!needValue) argList.add(new Arg(arg));
             }

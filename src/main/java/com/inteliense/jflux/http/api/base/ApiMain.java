@@ -1,13 +1,13 @@
 package com.inteliense.jflux.http.api.base;
 
-import com.inteliense.zeta.api.endpoints.permissions.ApiEndpointPermissions;
-import com.inteliense.zeta.api.models.ApiModel;
-import com.inteliense.zeta.api.models.AppModelCollection;
-import com.inteliense.zeta.api.prereqs.ApiBase;
-import com.inteliense.zeta.api.prereqs.ApiService;
-import com.inteliense.zeta.api.users.ApiUserPermissions;
-import com.inteliense.zeta.server.config.APIServerConfig;
-import com.inteliense.zeta.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.base.endpoints.permissions.ApiEndpointPermissions;
+import com.inteliense.jflux.http.api.base.models.ApiModel;
+import com.inteliense.jflux.http.api.base.models.AppModelCollection;
+import com.inteliense.jflux.http.api.base.prereqs.ApiBase;
+import com.inteliense.jflux.http.api.base.prereqs.ApiService;
+import com.inteliense.jflux.http.api.base.users.ApiUserPermissions;
+import com.inteliense.jflux.http.api.server.config.APIServerConfig;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
 
 import java.util.ArrayList;
 

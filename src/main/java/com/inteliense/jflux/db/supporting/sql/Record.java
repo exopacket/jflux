@@ -1,8 +1,7 @@
 package com.inteliense.jflux.db.supporting.sql;
 
-import org.extendedweb.aloft.lib.model.AloftModelObject;
-import org.extendedweb.aloft.utils.data.JSON;
-import org.extendedweb.aloft.utils.global.__;
+import com.inteliense.jflux.json.JSON;
+import com.inteliense.jflux.todash.__;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -73,8 +72,5 @@ public class Record {
         return new Object();
     }
 
-    public AloftModelObject modelObject() {
-        return null;
-    }
 
 }

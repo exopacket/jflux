@@ -1,6 +1,6 @@
 package com.inteliense.jflux.http.api.server.resources;
 
-import com.inteliense.zeta.server.impl.APIExecute;
+import com.inteliense.jflux.http.api.server.impl.APIExecute;
 
 import java.util.ArrayList;
 

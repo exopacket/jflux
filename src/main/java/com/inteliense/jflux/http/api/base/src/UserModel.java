@@ -1,11 +1,11 @@
 package com.inteliense.jflux.http.api.base.src;
 
-import com.inteliense.zeta.api.models.ApiModel;
-import com.inteliense.zeta.api.models.ApiModelField;
-import com.inteliense.zeta.api.prereqs.ApiService;
-import com.inteliense.zeta.api.src.fields.FirstName;
-import com.inteliense.zeta.api.src.fields.LastName;
-import com.inteliense.zeta.api.src.fields.UserId;
+import com.inteliense.jflux.http.api.base.models.ApiModel;
+import com.inteliense.jflux.http.api.base.models.ApiModelField;
+import com.inteliense.jflux.http.api.base.prereqs.ApiService;
+import com.inteliense.jflux.http.api.base.src.fields.FirstName;
+import com.inteliense.jflux.http.api.base.src.fields.LastName;
+import com.inteliense.jflux.http.api.base.src.fields.UserId;
 
 import java.util.ArrayList;
 

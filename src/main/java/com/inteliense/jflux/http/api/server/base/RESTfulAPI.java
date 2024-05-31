@@ -1,16 +1,17 @@
 package com.inteliense.jflux.http.api.server.base;
 
-import com.inteliense.zeta.server.API;
-import com.inteliense.zeta.server.config.APIServerConfig;
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.server.types.APIServerType;
-import com.inteliense.zeta.server.types.CORSPolicy;
+import com.inteliense.jflux.http.api.base.prereqs.ApiService;
+import com.inteliense.jflux.http.api.server.API;
+import com.inteliense.jflux.http.api.server.config.APIServerConfig;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.server.types.APIServerType;
+import com.inteliense.jflux.http.api.server.types.CORSPolicy;
 
 public class RESTfulAPI extends API {
 
-    public RESTfulAPI(APIServerConfig config) throws APIException {
-        super(config);
+    public RESTfulAPI(APIServerConfig config, ApiService service) throws APIException {
+        super(config, service);
     }
 
     public static RESTfulAPI fromDefault(String keystorePath, String keystorePassword) throws APIException {
@@ -31,7 +32,7 @@ public class RESTfulAPI extends API {
         CORSPolicy corsPolicy = new CORSPolicy(false);
         config.setCorsPolicy(corsPolicy);
 
-        return new RESTfulAPI(config);
+        return new RESTfulAPI(config, null);
 
     }
 
@@ -65,7 +66,7 @@ public class RESTfulAPI extends API {
 
         config.setCorsPolicy(corsPolicy);
 
-        return new RESTfulAPI(config);
+        return new RESTfulAPI(config, null);
 
     }
 
@@ -90,7 +91,7 @@ public class RESTfulAPI extends API {
 
         config.setCorsPolicy(corsPolicy);
 
-        return new RESTfulAPI(config);
+        return new RESTfulAPI(config, null);
 
     }
 
@@ -122,7 +123,7 @@ public class RESTfulAPI extends API {
 
         config.setCorsPolicy(corsPolicy);
 
-        return new RESTfulAPI(config);
+        return new RESTfulAPI(config, null);
 
     }
 

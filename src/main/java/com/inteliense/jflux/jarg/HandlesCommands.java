@@ -1,7 +1,6 @@
-package com.inteliense.jflux.jarg.commands.base;
+package com.inteliense.jflux.jarg;
 
 
-import com.inteliense.jflux.jarg.Help;
 import com.inteliense.jflux.todash.__;
 
 import java.lang.reflect.Constructor;
@@ -9,19 +8,21 @@ import java.lang.reflect.Constructor;
 public abstract class HandlesCommands {
 
     protected Command command;
+    protected Keywords keywords;
 
-    public static HandlesCommands create(Command command) {
+    public static HandlesCommands create(Command command, Keywords keywords) {
         try {
             Class<?> _class = command.getCommandClass();
-            Constructor<?> construct = _class.getConstructor(Command.class);
-            Object __class = construct.newInstance(command);
+            Constructor<?> construct = _class.getConstructor(Command.class, Keywords.class);
+            Object __class = construct.newInstance(command, keywords);
             return (HandlesCommands) __class;
         } catch (Exception ignored) {}
         return null;
     }
 
-    public HandlesCommands(Command command) {
+    public HandlesCommands(Command command, Keywords keywords) {
         this.command = command;
+        this.keywords = keywords;
     }
 
     public void printHelp() {
@@ -29,7 +30,7 @@ public abstract class HandlesCommands {
     }
 
     protected Arg requiredFlag(String flag) {
-        Arg arg = Keywords.getFlagArg(flag);
+        Arg arg = keywords.getFlagArg(flag);
         if(arg.isFlag() && hasFlag(flag) && ((arg.requiresValue() && !__.empty(flagValue(flag))) || !arg.requiresValue()))
             return arg;
         command.exit("[--" + flag + "] is required for this command.", 1);
@@ -38,7 +39,7 @@ public abstract class HandlesCommands {
 
     protected Arg orOptionalFlag(String ...flags) {
         for(int i=0; i<flags.length; i++) {
-            Arg flag = Keywords.getFlagArg(flags[i]);
+            Arg flag = keywords.getFlagArg(flags[i]);
             if(!__.isset(flag)) continue;
             if(!flag.isFlag()) continue;
             if(hasFlag(flags[i]) && ((flag.requiresValue() && !__.empty(flagValue(flags[i]))) || !flag.requiresValue()))
@@ -49,7 +50,7 @@ public abstract class HandlesCommands {
 
     protected Arg orRequiredFlag(String ...flags) {
         for(int i=0; i<flags.length; i++) {
-            Arg flag = Keywords.getFlagArg(flags[i]);
+            Arg flag = keywords.getFlagArg(flags[i]);
             if(!__.isset(flag)) continue;
             if(!flag.isFlag()) continue;
             if(hasFlag(flags[i]) && ((flag.requiresValue() && !__.empty(flagValue(flags[i])) || !flag.requiresValue())))

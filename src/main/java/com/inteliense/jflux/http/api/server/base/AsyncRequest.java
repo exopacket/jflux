@@ -1,12 +1,12 @@
 package com.inteliense.jflux.http.api.server.base;
 
-import com.inteliense.zeta.server.containers.APIResponse;
-import com.inteliense.zeta.server.containers.ClientSession;
-import com.inteliense.zeta.server.containers.Parameters;
-import com.inteliense.zeta.server.containers.RequestHeaders;
-import com.inteliense.zeta.server.resources.APIResource;
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.SHA;
+import com.inteliense.jflux.http.api.server.containers.APIResponse;
+import com.inteliense.jflux.http.api.server.containers.ClientSession;
+import com.inteliense.jflux.http.api.server.containers.Parameters;
+import com.inteliense.jflux.http.api.server.containers.RequestHeaders;
+import com.inteliense.jflux.http.api.server.resources.APIResource;
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.SHA;
 
 import java.time.LocalDateTime;
 

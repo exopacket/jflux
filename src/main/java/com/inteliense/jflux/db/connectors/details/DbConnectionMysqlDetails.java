@@ -1,7 +1,6 @@
 package com.inteliense.jflux.db.connectors.details;
 
 import com.inteliense.jflux.db.supporting.DbType;
-import org.extendedweb.aloft.lib.lang.types.base.T;
 
 public class DbConnectionMysqlDetails extends DbConnectionDetails {
 
@@ -23,11 +22,11 @@ public class DbConnectionMysqlDetails extends DbConnectionDetails {
 
     @Override
     protected void build() {
-        append("name", T.string(), name);
-        append("host", T.string(), host);
-        append("port", T.number(), port);
-        append("username", T.string(), username);
-        append("password", T.string(), password);
+        append("name", String.class, name);
+        append("host", String.class, host);
+        append("port", Integer.class, port);
+        append("username", String.class, username);
+        append("password", String.class, password);
     }
 
 }

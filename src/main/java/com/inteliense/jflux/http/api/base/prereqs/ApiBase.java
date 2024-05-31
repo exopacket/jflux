@@ -1,9 +1,9 @@
 package com.inteliense.jflux.http.api.base.prereqs;
 
-import com.inteliense.zeta.server.API;
-import com.inteliense.zeta.server.config.APIServerConfig;
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.server.API;
+import com.inteliense.jflux.http.api.server.config.APIServerConfig;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
 
 public class ApiBase extends API {
 

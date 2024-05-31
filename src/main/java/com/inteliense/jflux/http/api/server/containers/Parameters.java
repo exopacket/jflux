@@ -1,9 +1,9 @@
 package com.inteliense.jflux.http.api.server.containers;
 
-import com.inteliense.zeta.server.containers.ClientSession;
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.JSON;
-import com.inteliense.zeta.utils.RSA;
+import com.inteliense.jflux.http.api.server.containers.ClientSession;
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.JSON;
+import com.inteliense.jflux.http.api.utils.RSA;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

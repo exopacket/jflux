@@ -1,6 +1,6 @@
 package com.inteliense.jflux.http.api.client;
 
-import com.inteliense.zeta.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
 import org.apache.http.Header;
 
 import java.time.LocalDateTime;

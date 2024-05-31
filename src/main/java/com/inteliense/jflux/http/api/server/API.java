@@ -1,18 +1,18 @@
 package com.inteliense.jflux.http.api.server;
 
-import com.inteliense.zeta.api.prereqs.ApiService;
-import com.inteliense.zeta.server.base.APIServer;
-import com.inteliense.zeta.server.config.APIServerConfig;
-import com.inteliense.zeta.server.containers.ClientSession;
-import com.inteliense.zeta.server.containers.Parameters;
-import com.inteliense.zeta.server.containers.RemoteClient;
-import com.inteliense.zeta.server.containers.RequestHeaders;
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.server.impl.APIMethods;
-import com.inteliense.zeta.server.resources.APIResource;
-import com.inteliense.zeta.server.types.APIServerType;
-import com.inteliense.zeta.server.types.ContentType;
+import com.inteliense.jflux.http.api.base.prereqs.ApiService;
+import com.inteliense.jflux.http.api.server.base.APIServer;
+import com.inteliense.jflux.http.api.server.config.APIServerConfig;
+import com.inteliense.jflux.http.api.server.containers.ClientSession;
+import com.inteliense.jflux.http.api.server.containers.Parameters;
+import com.inteliense.jflux.http.api.server.containers.RemoteClient;
+import com.inteliense.jflux.http.api.server.containers.RequestHeaders;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.server.impl.APIMethods;
+import com.inteliense.jflux.http.api.server.resources.APIResource;
+import com.inteliense.jflux.http.api.server.types.APIServerType;
+import com.inteliense.jflux.http.api.server.types.ContentType;
 
 import java.util.ArrayList;
 import java.util.HashMap;

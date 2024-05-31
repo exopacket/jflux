@@ -1,12 +1,12 @@
 package com.inteliense.jflux.http.api.server.containers;
 
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.encryption.ZeroTrustKeyPairs;
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.server.types.APIServerType;
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.Random;
-import com.inteliense.zeta.utils.SHA;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.encryption.ZeroTrustKeyPairs;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.server.types.APIServerType;
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.Random;
+import com.inteliense.jflux.http.api.utils.SHA;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
 package com.inteliense.jflux.http.api.server.encryption;
 
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.RSA;
-import com.inteliense.zeta.utils.SHA;
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.RSA;
+import com.inteliense.jflux.http.api.utils.SHA;
 
 import java.security.KeyPair;
 import java.security.PrivateKey;

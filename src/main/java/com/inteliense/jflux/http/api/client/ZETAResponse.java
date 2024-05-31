@@ -1,7 +1,7 @@
 package com.inteliense.jflux.http.api.client;
 
-import com.inteliense.zeta.types.ZeroTrustResponseType;
-import com.inteliense.zeta.utils.*;
+import com.inteliense.jflux.http.api.types.ZeroTrustResponseType;
+import com.inteliense.jflux.http.api.utils.*;
 import org.json.simple.JSONObject;
 
 import java.security.PrivateKey;

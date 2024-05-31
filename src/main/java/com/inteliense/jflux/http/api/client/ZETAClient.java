@@ -1,10 +1,10 @@
 package com.inteliense.jflux.http.api.client;
 
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.types.ZeroTrustRequestType;
-import com.inteliense.zeta.types.ZeroTrustResponseType;
-import com.inteliense.zeta.utils.*;
-import com.inteliense.zeta.utils.Random;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.types.ZeroTrustRequestType;
+import com.inteliense.jflux.http.api.types.ZeroTrustResponseType;
+import com.inteliense.jflux.http.api.utils.*;
+import com.inteliense.jflux.http.api.utils.Random;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

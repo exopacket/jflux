@@ -1,8 +1,8 @@
 package com.inteliense.jflux.http.api.base.prereqs;
 
-import com.inteliense.zeta.api.endpoints.permissions.ApiEndpointPermissions;
-import com.inteliense.zeta.api.models.AppModelCollection;
-import com.inteliense.zeta.api.users.ApiUserPermissions;
+import com.inteliense.jflux.http.api.base.endpoints.permissions.ApiEndpointPermissions;
+import com.inteliense.jflux.http.api.base.models.AppModelCollection;
+import com.inteliense.jflux.http.api.base.users.ApiUserPermissions;
 
 public class ApiService {
 

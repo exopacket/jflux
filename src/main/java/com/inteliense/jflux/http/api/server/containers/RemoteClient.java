@@ -1,9 +1,9 @@
 package com.inteliense.jflux.http.api.server.containers;
 
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.base.APIServer;
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.server.resources.APIResource;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.base.APIServer;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.server.resources.APIResource;
 
 public abstract class RemoteClient {
 

@@ -1,4 +1,4 @@
-package com.inteliense.jflux.jarg.commands.base;
+package com.inteliense.jflux.jarg;
 
 import java.util.Arrays;
 
@@ -8,14 +8,14 @@ public abstract class Command {
     private Arg[] args = null;
     private Class cmdClass = null;
 
-    public Command(String[] args) {
-        Arg[] arr = Parser.getArgs(args);
+    public Command(String[] args, Keywords keywords) {
+        Arg[] arr = Parser.getArgs(args, keywords);
         if(arr.length == 0) {
             exit("Command not found.", 1);
             return;
         }
         cmd = arr[0];
-        cmdClass = Keywords.getClass(cmd.getName());
+        cmdClass = keywords.getClass(cmd.getName());
         this.args = Arrays.copyOfRange(arr, 1, arr.length);
     }
 

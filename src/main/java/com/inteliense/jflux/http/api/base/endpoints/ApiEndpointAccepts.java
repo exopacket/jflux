@@ -1,6 +1,6 @@
 package com.inteliense.jflux.http.api.base.endpoints;
 
-import com.inteliense.zeta.server.types.RequestType;
+import com.inteliense.jflux.http.api.server.types.RequestType;
 
 public class ApiEndpointAccepts {
 

@@ -1,9 +1,13 @@
 package com.inteliense.jflux.todash;
 
+import com.inteliense.jflux.crypto.Rand;
+import com.inteliense.jflux.crypto.builtin.SHA;
 import com.inteliense.jflux.encoding.BaseX;
 import com.inteliense.jflux.encoding.Hex;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class __ {
 
@@ -266,27 +270,27 @@ public class __ {
 
     public static class Console {
 
-        public void print(String message) {
+        public static void print(String message) {
             System.out.print(message);
         }
 
-        public void println(String message) {
+        public static void println(String message) {
             System.out.println(message);
         }
 
-        public void print(String message, TextColor color) {
+        public static void print(String message, TextColor color) {
             System.out.print(getAnsiColor(color) + message + ansiReset());
         }
 
-        public void println(String message, TextColor color) {
+        public static void println(String message, TextColor color) {
             System.out.println(getAnsiColor(color) + message + ansiReset());
         }
 
-        public LineCollection refreshable() {
+        public static LineCollection refreshable() {
             return new LineCollection();
         }
 
-        public LineCollection collection() {
+        public static LineCollection collection() {
             return new LineCollection();
         }
 
@@ -397,6 +401,63 @@ public class __ {
 
     private static String ansiReset() {
         return "\u001B[0m";
+    }
+
+    //legacy
+    public static String str(Object input) {
+        return String.valueOf(input);
+    }
+
+    public static int num(Object input) throws Exception {
+        try {
+            return Integer.parseInt(str(input));
+        } catch (Exception e) { throw new Exception("Integer parse error."); }
+    }
+
+    public static double dbl(Object input) throws Exception {
+        try {
+            return Double.parseDouble(str(input));
+        } catch (Exception e) { throw new Exception("Double parse error."); }
+    }
+
+    public static void printPrettyLn(String output) {
+        Console.println(output, TextColor.CYAN);
+    }
+
+    public static void printPrettyLn(String output, TextColor color) {
+        Console.println(output, color);
+    }
+
+    public static String[] arr(String...vals) {
+        return vals;
+    }
+
+    public static byte[] bites(String str) {
+        final Pattern textPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
+        boolean isBase64 = textPattern.matcher(str).matches();
+        try {
+            byte[] arr = null;
+            if(isBase64) arr = BaseX.bytesFrom64(str);
+            if(arr == null) arr = Hex.fromHex(str);
+            if(arr == null) arr = str.getBytes(StandardCharsets.UTF_8);
+            return arr;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static String id() {
+        return id(String.valueOf(System.nanoTime()), hex(Rand.secure(32)), Rand.str(32));
+    }
+
+    public static String id(String... seeds) {
+        String full = "";
+        for(int i=0; i< seeds.length; i++) {
+            if(i > 0) full += "_";
+            full += seeds[i];
+        }
+        full += String.valueOf(System.currentTimeMillis());
+        return Rand.randomCase(b64(SHA.Bites.getSha1(full)).replaceAll("[/=+]", ""));
     }
 
 }

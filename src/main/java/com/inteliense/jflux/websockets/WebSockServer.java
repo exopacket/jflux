@@ -1,13 +1,14 @@
 package com.inteliense.jflux.websockets;
 
+import com.inteliense.jflux.crypto.Rand;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.server.config.JettyWebSocketServletContainerInitializer;
-import org.extendedweb.aloft.utils.data.JSON;
-import org.extendedweb.aloft.utils.global.__;
+import com.inteliense.jflux.todash.__;
 import org.json.simple.JSONObject;
+import com.inteliense.jflux.json.JSON;
 
 import java.net.InetSocketAddress;
 import java.net.URI;
@@ -98,7 +99,7 @@ public abstract class WebSockServer
             session.disconnect();
             return null;
         }
-        String id = __.id();
+        String id = Rand.str(32);
         sessions.put(id, session);
         JSONObject obj = new JSONObject();
         obj.put("status", "connected");
