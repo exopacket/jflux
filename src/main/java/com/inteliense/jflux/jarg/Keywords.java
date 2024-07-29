@@ -7,14 +7,12 @@ import java.util.HashMap;
 @SuppressWarnings("ALL")
 public class Keywords {
 
-    private String pkg = "";
+    private String pkg;
     private ArrayList<Class<?>> commands = new ArrayList<>();
     private ArrayList<Class<?>> required = new ArrayList<>();
 
-    private HashMap<String, Object[]> flags = new HashMap<String, Object[]>();
-
-    public void setPackage(String name) {
-        pkg = name;
+    public Keywords(String pkg) {
+        this.pkg = pkg;
     }
 
     public void register(boolean requiresValue, Class<?>... classes) {
@@ -23,16 +21,21 @@ public class Keywords {
     }
 
     public Class getClass(String cmd) {
+        String[] parts = cmd.split("-");
+        String command = "";
+        for(int i=0; i<parts.length; i++) {
+            command += parts[i].substring(0, 1).toUpperCase() + parts[i].substring(1);
+        }
         try {
-            return Class.forName(pkg + cmd.substring(0, 1).toUpperCase() + cmd.substring(1));
-        } catch (Exception ignored) {}
+            return Class.forName(pkg + "." + command);
+        } catch (Exception ignored) { }
         return null;
     }
 
     public boolean exists(String cmd) {
         try {
             return commands.contains(getClass(cmd));
-        } catch (Exception e) {e.printStackTrace();}
+        } catch (Exception ignored) { }
         return false;
     }
 
@@ -43,31 +46,5 @@ public class Keywords {
         return false;
     }
 
-    public boolean flagExists(String className, String flag) {
-        try {
-            Class<?> c = getClass(className);
-            if(flags.containsKey(flag.toLowerCase())) {
-                Object[] v = flags.get(flag.toLowerCase());
-                if(v[1].getClass() == Array.class) {
-                    for (Class _c : (Class[]) v[1]) {
-                        if(_c == c) return true;
-                    }
-                } else {
-                    if(((Class) v[1]) == c) return true;
-                }
-            }
-        } catch (Exception ignored) {}
-        return false;
-    }
-
-    public Arg getFlagArg(String flag) {
-        try {
-            if(flags.containsKey(flag.toLowerCase())) {
-                Object[] v = flags.get(flag.toLowerCase());
-                return (Arg) v[0];
-            }
-        } catch (Exception ignored) {}
-        return null;
-    }
 
 }

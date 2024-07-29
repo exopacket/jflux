@@ -1,5 +1,6 @@
 package com.inteliense.jflux.http.api.server.impl;
 
+import com.inteliense.jflux.http.api.base.prereqs.ApiService;
 import com.inteliense.jflux.http.api.server.*;
 import com.inteliense.jflux.http.api.server.containers.ClientSession;
 import com.inteliense.jflux.http.api.server.containers.Parameters;
@@ -17,7 +18,6 @@ public interface APIMethods {
     APIKeyPair lookupApiKey(String apiKey);
     boolean lookupUserInfo(ClientSession session);
     HashMap<String, String> getParameters(String body, ContentType contentType);
-    void addToBlacklist(ClientSession clientSession, API.BlacklistEntryType entryType);
+    void addToBlacklist(ClientSession clientSession, ApiService.BlacklistEntryType entryType);
     void removeFromBlacklist(ClientSession clientSession);
-
 }

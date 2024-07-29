@@ -2,6 +2,7 @@ package com.inteliense.jflux.db.supporting;
 
 import com.inteliense.jflux.db.supporting.sql.*;
 import com.inteliense.jflux.exceptions.types.CommonException;
+import org.eclipse.jetty.util.ArrayUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ public class Query {
     private ArrayList<Field> insert = new ArrayList<Field>();
     private ArrayList<Condition> where = new ArrayList<Condition>();
     private ArrayList<Join> join = new ArrayList<Join>();
+    private HashMap<String, ArrayList<TableSchema>> createTable = new HashMap<>();
 
     private boolean delete = false;
     private boolean softDelete = false;
@@ -59,6 +61,13 @@ public class Query {
 //        }
 //        return this;
 //    }
+
+    public Query createTable(String tableName, TableSchema...cols) {
+        ArrayList<TableSchema> list = new ArrayList<>();
+        for(TableSchema col : cols) list.add(col);
+        createTable.put(tableName, list);
+        return this;
+    }
 
     public Query select() {
         select(Schema.getColumns(this.connection, database, table));
@@ -327,6 +336,7 @@ public class Query {
     public void run() {
         QueryAdapter qa = new QueryAdapter(connection);
         qa.q(this);
+        this.createTable.clear();
     }
 
     private String stripColumnChars(String input) {
@@ -368,6 +378,7 @@ public class Query {
                 insert,
                 where,
                 join,
+                createTable,
                 setTimestamps
         );
     }

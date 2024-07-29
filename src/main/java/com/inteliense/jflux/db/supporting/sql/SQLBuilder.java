@@ -1,6 +1,7 @@
 package com.inteliense.jflux.db.supporting.sql;
 
 import com.inteliense.jflux.db.supporting.QueryParams;
+import com.inteliense.jflux.db.supporting.TableSchema;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,7 +9,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class SQLBuilder {
 
@@ -26,9 +29,11 @@ public class SQLBuilder {
 
     }
 
-    public String getPreparedString() {
+    public String getPreparedString(boolean sqlite) {
 
         //TODO add support for sql functions, delete, order by, group by, and LIKE
+
+        if(!p.getTablesToCreate().isEmpty()) return getCreateTableString(p.getTablesToCreate());
 
         String sql = "";
 
@@ -36,7 +41,7 @@ public class SQLBuilder {
             sql += "SELECT";
             for(int i=0; i<p.selectSize(); i++) {
                 sql += (i > 0) ? ", " : " ";
-                sql += getColumnOrFunctionKey(p.nextSelect());
+                sql += getColumnOrFunctionKey(p.nextSelect(), sqlite);
                 if(p.selectSize() == 1) sql += " ";
             }
             sql += "FROM " + p.table() + " ";
@@ -44,7 +49,7 @@ public class SQLBuilder {
             sql += "INSERT INTO " + p.table() + " (";
             for (int i = 0; i < p.insertSize(); i++) {
                 sql += (i > 0) ? ", " : "";
-                sql += getColumnOrFunctionKey(p.nextInsert());
+                sql += getColumnOrFunctionKey(p.nextInsert(), sqlite);
             }
             if(p.setTimestamps()) {
                 sql += p.table() + ".`created_at`";
@@ -68,7 +73,7 @@ public class SQLBuilder {
                 sql += "UPDATE " + p.table() + " SET ";
                 for(int i=0; i<p.updateSize(); i++) {
                     sql += (i > 0) ? ", " : "";
-                    sql += getColumnOrFunctionKey(p.nextUpdate())+ "=?";
+                    sql += getColumnOrFunctionKey(p.nextUpdate(), sqlite)+ "=?";
                     if(p.updateSize() == 1) sql += " ";
                 }
                 if(p.setTimestamps()) {
@@ -302,8 +307,8 @@ public class SQLBuilder {
         return cleanQuery(sql);
     }
 
-    private static String getColumnOrFunctionKey(Field field) {
-        if(field.getType() == Column.class) return field.column().full();
+    private static String getColumnOrFunctionKey(Field field, boolean sqlite) {
+        if(field.getType() == Column.class) return sqlite ? field.column().name() : field.column().full();
         else if(field.getType() == SQLFunction.class) return field.function().full();
         return null;
     }
@@ -335,6 +340,27 @@ public class SQLBuilder {
                 + p.updateSize()
                 + p.whereSize()
                 + p.joinSize();
+    }
+
+    private String getCreateTableString(HashMap<String, ArrayList<TableSchema>> tables) {
+        String sql = "";
+        for(String table : tables.keySet()) {
+            sql += "CREATE TABLE IF NOT EXISTS " + table + "(";
+            ArrayList<TableSchema> fields = tables.get(table);
+            boolean commaFlag = true;
+            for(TableSchema field : fields) {
+                if(field.isId()) {
+                    sql += (!commaFlag ? ", " : "") + "`" + field.getCol()  + "` " + field.getType() + " PRIMARY KEY NOT NULL";
+                } else {
+                    sql += (!commaFlag ? ", `" : "`") + field.getCol() + "` " + field.getType();
+                    if(!field.isNullable()) sql += " NOT NULL";
+                    if(field.getDefaultValue() != null) sql += " DEFAULT " + field.getDefaultValue();
+                }
+                commaFlag = false;
+            }
+            sql += "); ";
+        }
+        return sql;
     }
 
     public static void set(PreparedStatement stmt, int pos, Object value) throws SQLException {

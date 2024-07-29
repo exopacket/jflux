@@ -4,15 +4,30 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    public static Arg[] getArgs(String[] args, Keywords keywords) {
+    public static Arg[] getArgs(String[] args, Keywords keywords, HandlesCommands cmd) {
         ArrayList<Arg> argList = new ArrayList<>();
         boolean needValue = false;
         int prevFlagIndex = -1;
         String prevName = "";
+
+        ArrayList<String> _args = new ArrayList<>();
+        for(String arg : args) {
+            if(arg.contains("=")) {
+                String[] parts = arg.split("=");
+                _args.add(parts[0]);
+                _args.add(parts[1]);
+            } else {
+                _args.add(arg);
+            }
+        }
+
+        args = new String[_args.size()];
+        _args.toArray(args);
+
         for(int i=0; i<args.length; i++) {
             String arg = args[i];
-            if(flagCheck(arg) && keywords.flagExists(args[0], arg)) {
-                Arg flag = keywords.getFlagArg(arg);
+            if(flagCheck(arg) && cmd.flagExists(arg)) {
+                Arg flag = cmd.getFlagArg(arg);
                 if(flag == null) continue;
                 argList.add(flag);
                 if(flag.requiresValue()) prevFlagIndex = argList.size() - 1;

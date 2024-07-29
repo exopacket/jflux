@@ -5,6 +5,7 @@ import com.inteliense.jflux.db.connectors.RedisConnection;
 import com.inteliense.jflux.db.connectors.SqliteConnection;
 import com.inteliense.jflux.db.connectors.details.DbConnectionDetails;
 import com.inteliense.jflux.db.connectors.details.DbConnectionMysqlDetails;
+import com.inteliense.jflux.db.connectors.details.DbConnectionSqlLiteDetails;
 import com.inteliense.jflux.db.supporting.redis.RedisAdapter;
 
 public class DbDriver {
@@ -16,7 +17,7 @@ public class DbDriver {
         this.type = details.getType();
         if(type == DbType.REDIS) this.connection = new RedisConnection(details);
         else if(type == DbType.MYSQL) this.connection = new MysqlConnection((DbConnectionMysqlDetails) details);
-        else if(type == DbType.SQLITE) this.connection = new SqliteConnection(details);
+        else if(type == DbType.SQLITE) this.connection = new SqliteConnection((DbConnectionSqlLiteDetails) details);
     }
 
     public DbConnection conn() {

@@ -7,10 +7,15 @@ public class Arg {
     private String value = null;
     private boolean flag = false;
     private boolean required = false;
+    private String helpText = "";
 
     public Arg(String name) {
         if(name.contains("--")) this.flag = true;
         this.name = name.replace("-", "");
+    }
+
+    public Arg(char option) {
+        this.option = option;
     }
 
     public Arg(String name, boolean requiresValue) {
@@ -22,11 +27,13 @@ public class Arg {
     public Arg(String name, char option) {
         if(name.contains("--")) this.flag = true;
         this.name = name.replace("-", "");
+        this.option = option;
     }
 
     public Arg(String name, char option, boolean requiresValue) {
         if(name.contains("--")) this.flag = true;
         this.name = name.replace("-", "");
+        this.option = option;
         this.required = requiresValue;
     }
 
@@ -39,6 +46,10 @@ public class Arg {
         this.value = value;
     }
 
+    public void setHelpText(String value) {
+        this.helpText = value;
+    }
+
     public boolean requiresValue() {
         return required;
     }
@@ -49,6 +60,10 @@ public class Arg {
 
     public boolean isOption() {
         return this.option != '\0';
+    }
+
+    public String getOption() {
+        return "" + option;
     }
 
     public String getName() {

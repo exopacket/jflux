@@ -58,7 +58,7 @@ public class MysqlConnection extends DbConnection implements ExecutesQueries  {
 
         try {
             SQLBuilder builder = new SQLBuilder(p);
-            String preparedSql = builder.getPreparedString();
+            String preparedSql = builder.getPreparedString(false);
             PreparedStatement stmt = conn.prepareStatement(preparedSql);
             for(int i=0;i< builder.valueSize(); i++) {
                 Object v = builder.next();
@@ -82,7 +82,7 @@ public class MysqlConnection extends DbConnection implements ExecutesQueries  {
 
         try {
             SQLBuilder builder = new SQLBuilder(p);
-            String preparedSql = builder.getPreparedString();
+            String preparedSql = builder.getPreparedString(false);
             PreparedStatement stmt = conn.prepareStatement(preparedSql);
             for(int i=0;i< builder.valueSize(); i++) {
                 Object v = builder.next();

@@ -1,5 +1,6 @@
 package com.inteliense.jflux.http.api.server.base;
 
+import com.inteliense.jflux.http.api.base.endpoints.InboundRequest;
 import com.inteliense.jflux.http.api.server.config.APIServerConfig;
 import com.inteliense.jflux.http.api.server.containers.*;
 import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
@@ -136,40 +137,40 @@ public class APIResponseServer {
 
     }
 
-    public APIResponse execute(ClientSession clientSession, APIResource resource, Parameters parameters, RequestHeaders headers) {
+    public APIResponse execute(APIResource resource, InboundRequest request) {
         try {
-            return resource.execute(clientSession, parameters, headers);
+            return resource.execute(request);
         } catch (Exception ex) {
             ex.printStackTrace();
-            return new APIResponse(clientSession, ResponseCode.SERVER_ERROR);
+            return new APIResponse(request.getSession(), ResponseCode.SERVER_ERROR);
         }
     }
-    public APIResponse processRequest(ClientSession clientSession, APIResource resource, Parameters params, RequestHeaders headers) throws Exception {
+    public APIResponse processRequest(APIResource resource, InboundRequest request) throws Exception {
 
-        if(!isAuthenticated(headers, resource, params, clientSession)) {
-            return new APIResponse(clientSession, ResponseCode.UNAUTHORIZED);
+        if(!isAuthenticated(request.getHeaders(), resource, request.getParams(), request.getSession())) {
+            return new APIResponse(request.getSession(), ResponseCode.UNAUTHORIZED);
         }
 
         int requestIndex = findAsyncRequest(resource.getName());
         if(requestIndex < 0) {
-            return new APIResponse(clientSession, ResponseCode.UNAUTHORIZED);
+            return new APIResponse(request.getSession(), ResponseCode.UNAUTHORIZED);
         }
-        AsyncRequest request = asyncRequests.get(requestIndex);
+        AsyncRequest asyncRequest = asyncRequests.get(requestIndex);
 
-        if(!request.requestAuthVerifies(params.getString("authorization"))) {
-            return new APIResponse(clientSession, ResponseCode.UNAUTHORIZED);
+        if(!asyncRequest.requestAuthVerifies(request.getParams().getString("authorization"))) {
+            return new APIResponse(request.getSession(), ResponseCode.UNAUTHORIZED);
         }
 
-        request.newPoll();
+        asyncRequest.newPoll();
 
-        if(request.isRequestComplete()) {
-            APIResponse resp = request.getResponse();
+        if(asyncRequest.isRequestComplete()) {
+            APIResponse resp = asyncRequest.getResponse();
             if(config.getServerType() == APIServerType.ZERO_TRUST)
                 resp.encrypt();
             return resp;
         } else {
 
-            return request.getContinue();
+            return asyncRequest.getContinue();
 
         }
 
@@ -369,9 +370,10 @@ public class APIResponseServer {
             }
 
             APIResponse response = null;
+            InboundRequest request = new InboundRequest(clientSession, new Parameters(parameters), headers, getApiResources().getResourcePath(resource), t);
 
             try {
-                response = execute(clientSession, getApiResources().getResource(resource), new Parameters(parameters), headers);
+                response = execute(getApiResources().getResource(resource), request);
             } catch (Exception e) {
                 serverError(t);
                 return;

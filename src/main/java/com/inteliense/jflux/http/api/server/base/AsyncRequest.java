@@ -1,9 +1,8 @@
 package com.inteliense.jflux.http.api.server.base;
 
+import com.inteliense.jflux.http.api.base.endpoints.InboundRequest;
 import com.inteliense.jflux.http.api.server.containers.APIResponse;
 import com.inteliense.jflux.http.api.server.containers.ClientSession;
-import com.inteliense.jflux.http.api.server.containers.Parameters;
-import com.inteliense.jflux.http.api.server.containers.RequestHeaders;
 import com.inteliense.jflux.http.api.server.resources.APIResource;
 import com.inteliense.jflux.http.api.utils.EncodingUtils;
 import com.inteliense.jflux.http.api.utils.SHA;
@@ -85,9 +84,9 @@ public class AsyncRequest {
 
         APIResource resource = server.addResource(staticResponseId, new String[]{"authorization"}, new APIResource() {
             @Override
-            public APIResponse execute(ClientSession clientSession, Parameters params, RequestHeaders headers) throws Exception {
+            public APIResponse execute(InboundRequest request) throws Exception {
 
-                return server.processRequest(clientSession, this, params, headers);
+                return server.processRequest(this, request);
 
             }
 

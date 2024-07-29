@@ -4,5 +4,4 @@ public enum FieldAccess {
     PUBLIC,
     PROTECTED,
     PRIVATE
-
 }

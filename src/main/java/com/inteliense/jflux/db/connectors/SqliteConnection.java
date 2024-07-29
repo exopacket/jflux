@@ -1,6 +1,7 @@
 package com.inteliense.jflux.db.connectors;
 
 import com.inteliense.jflux.db.connectors.details.DbConnectionDetails;
+import com.inteliense.jflux.db.connectors.details.DbConnectionSqlLiteDetails;
 import com.inteliense.jflux.db.supporting.*;
 import com.inteliense.jflux.db.supporting.sql.Condition;
 import com.inteliense.jflux.db.supporting.sql.Field;
@@ -16,7 +17,7 @@ public class SqliteConnection extends DbConnection implements ExecutesQueries  {
 
     private Connection conn = null;
 
-    public SqliteConnection(DbConnectionDetails details) {
+    public SqliteConnection(DbConnectionSqlLiteDetails details) {
         super(details);
     }
 
@@ -33,10 +34,10 @@ public class SqliteConnection extends DbConnection implements ExecutesQueries  {
     @Override
     protected void connect() throws Exception, CriticalException {
 
-        String jdbc = "jdbc:sqlite:" + "db";
-
-        conn = DriverManager.getConnection(jdbc);
-        if(conn == null) throw new CriticalException("Failed to connect to sqlite.");
+        String jdbc = "jdbc:sqlite:" + details.get("filepath");
+        System.out.println(jdbc);
+        this.conn = DriverManager.getConnection(jdbc);
+        if(this.conn == null) throw new CriticalException("Failed to connect to sqlite.");
 
     }
 
@@ -52,9 +53,19 @@ public class SqliteConnection extends DbConnection implements ExecutesQueries  {
     @Override
     public QueryResults execute(QueryParams p) {
 
+        if(conn == null) {
+            try {
+                connect();
+            } catch (Exception e) {
+
+            } catch (CriticalException e) {
+
+            }
+        }
+
         try {
             SQLBuilder builder = new SQLBuilder(p);
-            String preparedSql = builder.getPreparedString();
+            String preparedSql = builder.getPreparedString(true);
             PreparedStatement stmt = conn.prepareStatement(preparedSql);
             for(int i=0;i< builder.valueSize(); i++) {
                 Object v = builder.next();
@@ -75,9 +86,20 @@ public class SqliteConnection extends DbConnection implements ExecutesQueries  {
     @Override
     public void executeUpdate(QueryParams p) {
 
+        if(conn == null) {
+            try {
+                connect();
+            } catch (Exception e) {
+
+            } catch (CriticalException e) {
+
+            }
+        }
+
         try {
             SQLBuilder builder = new SQLBuilder(p);
-            String preparedSql = builder.getPreparedString();
+            String preparedSql = builder.getPreparedString(true);
+            System.out.println(preparedSql);
             PreparedStatement stmt = conn.prepareStatement(preparedSql);
             for(int i=0;i< builder.valueSize(); i++) {
                 Object v = builder.next();
@@ -88,6 +110,7 @@ public class SqliteConnection extends DbConnection implements ExecutesQueries  {
             }
             stmt.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
             onError(new CriticalException("Failed to execute query.", e));
         }
 

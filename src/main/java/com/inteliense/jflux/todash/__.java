@@ -4,9 +4,11 @@ import com.inteliense.jflux.crypto.Rand;
 import com.inteliense.jflux.crypto.builtin.SHA;
 import com.inteliense.jflux.encoding.BaseX;
 import com.inteliense.jflux.encoding.Hex;
+import org.w3c.dom.Text;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class __ {
@@ -270,28 +272,76 @@ public class __ {
 
     public static class Console {
 
-        public static void print(String message) {
+        public void print(String message) {
             System.out.print(message);
         }
 
-        public static void println(String message) {
+        public void println(String message) {
             System.out.println(message);
         }
 
-        public static void print(String message, TextColor color) {
+        public void print(String message, TextColor color) {
             System.out.print(getAnsiColor(color) + message + ansiReset());
         }
 
-        public static void println(String message, TextColor color) {
+        public void println(String message, TextColor color) {
             System.out.println(getAnsiColor(color) + message + ansiReset());
         }
 
-        public static LineCollection refreshable() {
+        public LineCollection refreshable() {
             return new LineCollection();
         }
 
-        public static LineCollection collection() {
+        public LineCollection collection() {
             return new LineCollection();
+        }
+
+        public int interactiveList(String message, String...options) {
+            println(message);
+            for(int i=0; i< options.length; i++) {
+                int optNum = i + 1;
+                String opt = options[i];
+                print("[ " + optNum + " ] ➤ ", TextColor.GREEN);
+                println(opt);
+            }
+            String res = collect("Enter the number of your selection");
+            return Integer.parseInt(res);
+        }
+
+        public String collect(String prompt) {
+            print(prompt + " ➤ ", TextColor.PURPLE);
+            Scanner scnr = new Scanner(System.in);
+            return scnr.nextLine();
+        }
+
+        public String collect(String prompt, String defaultEntry) {
+            print(prompt, TextColor.PURPLE);
+            print(" [" + defaultEntry + "]");
+            print(" ➤ ", TextColor.PURPLE);
+            Scanner scnr = new Scanner(System.in);
+            String input = scnr.nextLine();
+            if(input.trim().isEmpty()) return defaultEntry;
+            return input;
+        }
+
+        public String collectSecure(String prompt) {
+            print(prompt, TextColor.PURPLE);
+            print(" ➤ ", TextColor.PURPLE);
+            char[] password = System.console().readPassword();
+            String input = new String(password);
+            return input;
+        }
+
+        public boolean confirm(String prompt) {
+            print(prompt, TextColor.PURPLE);
+            print(" [y/n]");
+            print(" ➤ ", TextColor.PURPLE);
+            Scanner scnr = new Scanner(System.in);
+            String line = scnr.nextLine().trim().toUpperCase();
+            boolean yes = line.equals("Y");
+            boolean no = line.equals("N");
+            if(!yes && !no) return confirm(prompt);
+            return yes;
         }
 
     }
@@ -421,11 +471,11 @@ public class __ {
     }
 
     public static void printPrettyLn(String output) {
-        Console.println(output, TextColor.CYAN);
+        console().println(output, TextColor.CYAN);
     }
 
     public static void printPrettyLn(String output, TextColor color) {
-        Console.println(output, color);
+        console().println(output, color);
     }
 
     public static String[] arr(String...vals) {

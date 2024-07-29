@@ -1,33 +1,24 @@
 package com.inteliense.jflux.jarg;
 
+import org.objectweb.asm.Handle;
+
 import java.util.Arrays;
 
 public abstract class Command {
 
-    private Arg cmd = null;
-    private Arg[] args = null;
+    private String[] args = null;
     private Class cmdClass = null;
 
     public Command(String[] args, Keywords keywords) {
-        Arg[] arr = Parser.getArgs(args, keywords);
-        if(arr.length == 0) {
-            exit("Command not found.", 1);
-            return;
-        }
-        cmd = arr[0];
-        cmdClass = keywords.getClass(cmd.getName());
-        this.args = Arrays.copyOfRange(arr, 1, arr.length);
+        System.out.println(args[0]);
+        cmdClass = keywords.getClass(args[0]);
     }
 
     public Class<?> getCommandClass() {
         return this.cmdClass;
     }
 
-    public Arg getBase() {
-        return cmd;
-    }
-
-    public Arg[] getArgs() {
+    public String[] getArgs() {
         return this.args;
     }
 

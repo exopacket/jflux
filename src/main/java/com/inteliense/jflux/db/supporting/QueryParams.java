@@ -3,6 +3,7 @@ package com.inteliense.jflux.db.supporting;
 import com.inteliense.jflux.db.supporting.sql.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //QUERY PARAMS CLASS MAY BE UNNECESSARY
 //HOWEVER, FOR CLEANLINESS OF CODE AND TO SEPARATE
@@ -36,6 +37,8 @@ public class QueryParams {
 
     private SQLColumnOrFunction groupByColumn = null;
 
+    private HashMap<String, ArrayList<TableSchema>> createTables = new HashMap<>();
+
     public QueryParams(
             String database,
             String table,
@@ -49,6 +52,7 @@ public class QueryParams {
             ArrayList<Field> insert,
             ArrayList<Condition> where,
             ArrayList<Join> join,
+            HashMap<String, ArrayList<TableSchema>> createTables,
             boolean setTimestamps
     ) {
         this.database = database;
@@ -63,6 +67,7 @@ public class QueryParams {
         this.insert = insert;
         this.where = where;
         this.join = join;
+        this.createTables = createTables;
         this.setTimestamps = setTimestamps;
     }
 
@@ -132,6 +137,10 @@ public class QueryParams {
         currUpdate++;
         if(currUpdate < update.size()) return update.get(currUpdate);
         return null;
+    }
+
+    public HashMap<String, ArrayList<TableSchema>> getTablesToCreate() {
+        return this.createTables;
     }
 
     public Condition nextNotJoinWhere() {

@@ -1,28 +1,38 @@
 package com.inteliense.jflux.http.api.base.endpoints;
 
+import com.inteliense.jflux.files.PathVariable;
 import com.inteliense.jflux.http.api.base.endpoints.expectations.ApiExpectations;
 import com.inteliense.jflux.http.api.base.endpoints.permissions.ApiEndpointPermissions;
-import com.inteliense.jflux.http.api.server.types.RequestType;
+import com.inteliense.jflux.http.api.base.prereqs.ApiBase;
+import com.inteliense.jflux.http.api.server.containers.APIResponse;
+import com.inteliense.jflux.http.api.server.containers.ClientSession;
+import com.inteliense.jflux.http.api.server.containers.Parameters;
+import com.inteliense.jflux.http.api.server.containers.RequestHeaders;
+import com.inteliense.jflux.http.api.server.resources.APIResource;
 
-public abstract class ApiEndpoint {
+public abstract class ApiEndpoint extends ApiResource {
 
-    private int index;
-    private ApiEndpointAccepts endpointAccepts;
-    private ApiExpectations[] expectations;
-    private ApiEndpoint[] children = null;
-
-    public ApiEndpoint(int index, ApiEndpoint...children) {
-        this.index = index;
-        this.endpointAccepts = new ApiEndpointAccepts(RequestType.OPTIONS, RequestType.GET, RequestType.POST, RequestType.PUT, RequestType.DELETE);
-        this.expectations = expectations();
-        if(children.length > 0) this.children = children;
+    public ApiEndpoint(int index, String path, ApiBase api) {
+        super(index, path, EndpointType.ENDPOINT, api);
     }
 
-    protected abstract ApiEndpointAccepts endpointAccepts(ApiEndpointAccepts base);
-    protected abstract ApiExpectations[] expectations();
-
-    protected ApiEndpointPermissions permissions() {
-        return null;
+    @Override
+    public APIResponse index(InboundRequest request) {
+        return get(request);
     }
+
+    @Override
+    public APIResponse update(InboundRequest request) {
+        return put(request);
+    }
+
+    @Override
+    public APIResponse create(InboundRequest request) {
+        return post(request);
+    }
+
+    public abstract APIResponse get(InboundRequest request);
+    public abstract APIResponse put(InboundRequest request);
+    public abstract APIResponse post(InboundRequest request);
 
 }

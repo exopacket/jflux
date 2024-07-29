@@ -1,4 +1,4 @@
 package com.inteliense.jflux.sys;
 
-public class Platform {
+public class PackageUtils {
 }

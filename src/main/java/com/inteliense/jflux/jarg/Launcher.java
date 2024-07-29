@@ -1,10 +1,14 @@
 package com.inteliense.jflux.jarg;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Launcher {
 
     public static void execute(String[] args, Keywords keywords) {
         Command cmd = null;
         HandlesCommands container = null;
+        Arg[] argList = new Arg[0];
 
         if(args.length == 0) {
             Help.getFromKeywords(keywords).print();
@@ -19,7 +23,9 @@ public class Launcher {
                     System.exit(code);
                 }
             };
-            container = HandlesCommands.create(cmd, keywords);
+            container = HandlesCommands.create(cmd);
+            argList = Parser.getArgs(args, keywords, container);
+            container.parsedArgs(argList);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("General error.");

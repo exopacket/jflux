@@ -1,7 +1,10 @@
 package com.inteliense.jflux.db;
 
+import com.inteliense.jflux.crypto.Rand;
+import com.inteliense.jflux.crypto.builtin.SHA;
 import com.inteliense.jflux.db.connectors.details.DbConnectionDetails;
 import com.inteliense.jflux.db.connectors.details.DbConnectionMysqlDetails;
+import com.inteliense.jflux.db.connectors.details.DbConnectionSqlLiteDetails;
 import com.inteliense.jflux.db.supporting.DbDriver;
 import com.inteliense.jflux.db.supporting.Query;
 import com.inteliense.jflux.exceptions.types.CriticalException;
@@ -12,6 +15,11 @@ public class Db {
     private String database = null;
 
     public Db(DbConnectionDetails details) {
+        this.driver = new DbDriver(details);
+        this.database = details.get("name");
+    }
+
+    public Db(DbConnectionSqlLiteDetails details) {
         this.driver = new DbDriver(details);
         this.database = details.get("name");
     }
@@ -45,6 +53,10 @@ public class Db {
 
     public DbDriver getRawDriver() {
         return this.driver;
+    }
+
+    public static String generateId() {
+        return SHA.getSha1(Rand.secure(64));
     }
 
 }

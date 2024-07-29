@@ -1,5 +1,7 @@
 package com.inteliense.jflux.http.api.tests;
 
+import com.inteliense.jflux.http.api.base.endpoints.InboundRequest;
+import com.inteliense.jflux.http.api.base.prereqs.ApiService;
 import com.inteliense.jflux.http.api.server.*;
 import com.inteliense.jflux.http.api.server.config.APIServerConfig;
 import com.inteliense.jflux.http.api.server.containers.*;
@@ -8,7 +10,10 @@ import com.inteliense.jflux.http.api.server.exceptions.APIException;
 import com.inteliense.jflux.http.api.server.resources.APIResource;
 import com.inteliense.jflux.http.api.server.types.APIServerType;
 import com.inteliense.jflux.http.api.server.types.CORSPolicy;
+import com.inteliense.jflux.http.api.server.types.ContentType;
 import org.json.simple.JSONObject;
+
+import java.util.HashMap;
 
 public class ServerMain {
 
@@ -35,6 +40,16 @@ public class ServerMain {
         API api = new API(config, null) {
 
             @Override
+            public boolean inTimeout(ClientSession clientSession, int perMinute) {
+                return false;
+            }
+
+            @Override
+            public boolean inBlacklist(ClientSession clientSession) {
+                return false;
+            }
+
+            @Override
             public APIKeyPair lookupApiKey(String apiKey) {
 
 
@@ -44,19 +59,34 @@ public class ServerMain {
 
             }
 
+            @Override
+            public HashMap<String, String> getParameters(String body, ContentType contentType) {
+                return null;
+            }
+
+            @Override
+            public void addToBlacklist(ClientSession clientSession, ApiService.BlacklistEntryType entryType) {
+
+            }
+
+            @Override
+            public void removeFromBlacklist(ClientSession clientSession) {
+
+            }
+
         };
 
         api.start();
-
-        api.addResource("query/new", new String[]{"sql", "parameters"}, new APIResource() {
-            @Override
-            public APIResponse execute(ClientSession clientSession, Parameters params, RequestHeaders headers) {
-                JSONObject obj = new JSONObject();
-                obj.put("response", "RESPONSE");
-                return new APIResponse(clientSession, obj, ResponseCode.SUCCESSFUL);
-            }
-
-        });
+//
+//        api.addResource("query/new", "POST", new String[]{"sql", "parameters"}, new APIResource() {
+//            @Override
+//            public APIResponse execute(InboundRequest request) {
+//                JSONObject obj = new JSONObject();
+//                obj.put("response", "RESPONSE");
+//                return new APIResponse(clientSession, obj, ResponseCode.SUCCESSFUL);
+//            }
+//
+//        });
 
     }
 

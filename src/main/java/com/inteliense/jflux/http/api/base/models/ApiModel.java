@@ -26,4 +26,8 @@ public abstract class ApiModel {
 
     protected abstract ArrayList<Class<? extends ApiModelField>> build(ArrayList<Class<? extends ApiModelField>>list);
 
+    public void migrate() {
+
+    }
+
 }

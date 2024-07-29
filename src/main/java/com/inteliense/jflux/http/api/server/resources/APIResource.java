@@ -12,6 +12,7 @@ public abstract class APIResource implements APIExecute {
     private boolean isAsync = false;
 
     public APIResource() {}
+
     public APIResource(String requestMethod) {
         this.requestMethod = requestMethod;
     }

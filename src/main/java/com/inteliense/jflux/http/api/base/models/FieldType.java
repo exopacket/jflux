@@ -9,5 +9,5 @@ public enum FieldType {
     TIMESTAMP,
     DATE,
     TIME,
-
+    FOREIGN_ID
 }
