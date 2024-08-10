@@ -29,7 +29,7 @@ public class PathObject {
     }
 
     public PathObject(String value, ArrayList<PathVariable> variables, String...append) {
-        this.value = PathUtil.fixDirectoryPath(value).substring(0, value.length() - 1 );
+        this.value = PathUtil.fixDirectoryPath(value);
         this.variables = variables;
         for(String part : append) {
             this.value += PlatformUtils.fileSeparator() + part;

@@ -56,6 +56,16 @@ public class MysqlConnection extends DbConnection implements ExecutesQueries  {
     @Override
     public QueryResults execute(QueryParams p) {
 
+        if(conn == null) {
+            try {
+                connect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (CriticalException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
             SQLBuilder builder = new SQLBuilder(p);
             String preparedSql = builder.getPreparedString(false);
@@ -79,6 +89,16 @@ public class MysqlConnection extends DbConnection implements ExecutesQueries  {
 
     @Override
     public void executeUpdate(QueryParams p) {
+
+        if(conn == null) {
+            try {
+                connect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (CriticalException e) {
+                e.printStackTrace();
+            }
+        }
 
         try {
             SQLBuilder builder = new SQLBuilder(p);

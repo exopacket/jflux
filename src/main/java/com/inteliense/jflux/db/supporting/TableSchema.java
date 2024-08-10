@@ -7,6 +7,7 @@ public class TableSchema {
     private boolean nullable;
     private boolean id;
     private String defaultValue;
+    private boolean autoIncrement = false;
 
     public TableSchema(String col, String type, boolean nullable, boolean id, String defaultValue) {
         this.col = col;
@@ -16,8 +17,20 @@ public class TableSchema {
         this.defaultValue = defaultValue;
     }
 
+    public TableSchema(String col, boolean id) {
+        this.col = col;
+        this.type = "int";
+        this.nullable = false;
+        this.id = id;
+        this.autoIncrement = true;
+    }
+
     public static TableSchema id() {
-        return new TableSchema("id", "text", false, true, null);
+        return new TableSchema("id", "varchar(40)", false, true, null);
+    }
+
+    public static TableSchema autoIncrement() {
+        return new TableSchema("id", "integer", true, true, null);
     }
 
     public static TableSchema col(String col, String type, boolean nullable, String defaultValue) {

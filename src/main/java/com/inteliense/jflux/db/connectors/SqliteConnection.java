@@ -35,7 +35,6 @@ public class SqliteConnection extends DbConnection implements ExecutesQueries  {
     protected void connect() throws Exception, CriticalException {
 
         String jdbc = "jdbc:sqlite:" + details.get("filepath");
-        System.out.println(jdbc);
         this.conn = DriverManager.getConnection(jdbc);
         if(this.conn == null) throw new CriticalException("Failed to connect to sqlite.");
 
@@ -57,9 +56,9 @@ public class SqliteConnection extends DbConnection implements ExecutesQueries  {
             try {
                 connect();
             } catch (Exception e) {
-
+                e.printStackTrace();
             } catch (CriticalException e) {
-
+                e.printStackTrace();
             }
         }
 
@@ -90,9 +89,9 @@ public class SqliteConnection extends DbConnection implements ExecutesQueries  {
             try {
                 connect();
             } catch (Exception e) {
-
+                e.printStackTrace();
             } catch (CriticalException e) {
-
+                e.printStackTrace();
             }
         }
 
