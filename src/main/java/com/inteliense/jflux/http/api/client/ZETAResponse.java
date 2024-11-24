@@ -1,5 +1,6 @@
 package com.inteliense.jflux.http.api.client;
 
+<<<<<<< HEAD
 import com.inteliense.jflux.crypto.Rand;
 import com.inteliense.jflux.crypto.builtin.AES;
 import com.inteliense.jflux.crypto.builtin.RSA;
@@ -8,6 +9,10 @@ import com.inteliense.jflux.encoding.Hex;
 import com.inteliense.jflux.http.api.types.ZeroTrustResponseType;
 import com.inteliense.jflux.http.api.utils.*;
 import com.inteliense.jflux.output.json.JSON;
+=======
+import com.inteliense.jflux.http.api.types.ZeroTrustResponseType;
+import com.inteliense.jflux.http.api.utils.*;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import org.json.simple.JSONObject;
 
 import java.security.PrivateKey;

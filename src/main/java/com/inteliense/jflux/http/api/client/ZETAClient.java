@@ -1,5 +1,6 @@
 package com.inteliense.jflux.http.api.client;
 
+<<<<<<< HEAD
 import com.inteliense.jflux.crypto.Rand;
 import com.inteliense.jflux.crypto.builtin.AES;
 import com.inteliense.jflux.crypto.builtin.RSA;
@@ -9,6 +10,13 @@ import com.inteliense.jflux.http.api.server.exceptions.APIException;
 import com.inteliense.jflux.http.api.types.ZeroTrustRequestType;
 import com.inteliense.jflux.http.api.types.ZeroTrustResponseType;
 import com.inteliense.jflux.output.json.JSON;
+=======
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.types.ZeroTrustRequestType;
+import com.inteliense.jflux.http.api.types.ZeroTrustResponseType;
+import com.inteliense.jflux.http.api.utils.*;
+import com.inteliense.jflux.http.api.utils.Random;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

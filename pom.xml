@@ -6,11 +6,19 @@
 
     <groupId>com.inteliense</groupId>
     <artifactId>jflux</artifactId>
+<<<<<<< HEAD
     <version>1.0.3</version>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
+=======
+    <version>1.0</version>
+
+    <properties>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -83,11 +91,14 @@
             <version>1.11.1000</version>
         </dependency>
         <dependency>
+<<<<<<< HEAD
             <groupId>com.googlecode.soundlibs</groupId>
             <artifactId>jlayer</artifactId>
             <version>1.0.1-1</version>
         </dependency>
         <dependency>
+=======
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
             <groupId>com.jsoftbiz</groupId>
             <artifactId>os-platform-finder</artifactId>
             <version>1.1</version>
@@ -110,9 +121,12 @@
                         </goals>
                     </execution>
                 </executions>
+<<<<<<< HEAD
                 <configuration>
 
                 </configuration>
+=======
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
             </plugin>
         </plugins>
     </build>

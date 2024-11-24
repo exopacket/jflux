@@ -19,8 +19,11 @@ public class InboundRequest {
 
     }
 
+<<<<<<< HEAD
     //TODO VERIFIED CLIENTS ONLY DURING DDOS
 
+=======
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
     public ClientSession getSession() {
         return session;
     }

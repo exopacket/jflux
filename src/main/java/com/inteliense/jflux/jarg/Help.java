@@ -4,6 +4,7 @@ import com.inteliense.jflux.todash.__;
 
 public class Help {
 
+<<<<<<< HEAD
     public static void getFromKeywords(Keywords keywords) {
         System.out.println("Usage: " + keywords.getExecutable() + " command [options] <value>");
         System.out.println("Options: \n");
@@ -14,6 +15,13 @@ public class Help {
     }
 
     public Help(HandlesCommands keyword) {
+=======
+    public static Help getFromKeywords(Keywords keywords) {
+        return null;
+    }
+
+    public Help() {
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 
     }
 

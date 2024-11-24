@@ -1,9 +1,16 @@
 package com.inteliense.jflux.http.api.server.encryption;
 
+<<<<<<< HEAD
 import com.inteliense.jflux.crypto.Rand;
 import com.inteliense.jflux.crypto.builtin.AES;
 import com.inteliense.jflux.crypto.builtin.SHA;
 import com.inteliense.jflux.encoding.Hex;
+=======
+import com.inteliense.jflux.http.api.utils.AES;
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.Random;
+import com.inteliense.jflux.http.api.utils.SHA;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 
 public class APIKeyPair {
 

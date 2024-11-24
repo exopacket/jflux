@@ -1,6 +1,10 @@
 package com.inteliense.jflux.http.api.client;
 
+<<<<<<< HEAD
 import com.inteliense.jflux.todash.__;
+=======
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import org.apache.http.Header;
 
 import java.time.LocalDateTime;

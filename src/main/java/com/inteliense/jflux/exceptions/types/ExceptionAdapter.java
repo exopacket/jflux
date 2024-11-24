@@ -1,6 +1,10 @@
 package com.inteliense.jflux.exceptions.types;
 
+<<<<<<< HEAD
 import com.inteliense.jflux.output.json.JSON;
+=======
+import com.inteliense.jflux.json.JSON;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import org.json.simple.JSONObject;
 
 import java.util.ArrayList;

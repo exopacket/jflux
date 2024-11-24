@@ -4,7 +4,11 @@ import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import com.inteliense.jflux.todash.__;
 import org.json.simple.JSONObject;
+<<<<<<< HEAD
 import com.inteliense.jflux.output.json.JSON;
+=======
+import com.inteliense.jflux.json.JSON;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 
 import java.util.concurrent.CountDownLatch;
 

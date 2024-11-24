@@ -1,6 +1,10 @@
 package com.inteliense.jflux.db.supporting.sql;
 
+<<<<<<< HEAD
 import com.inteliense.jflux.output.json.JSON;
+=======
+import com.inteliense.jflux.json.JSON;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import com.inteliense.jflux.todash.__;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

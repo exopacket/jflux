@@ -4,6 +4,10 @@ package com.inteliense.jflux.jarg;
 import com.inteliense.jflux.todash.__;
 
 import java.lang.reflect.Constructor;
+<<<<<<< HEAD
+=======
+import java.sql.Array;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +17,7 @@ public abstract class HandlesCommands {
     protected Command command;
     private List<Arg> args = new ArrayList<>();
     private ArrayList<Arg> availableArgs = new ArrayList<>();
+<<<<<<< HEAD
     private String executable = "";
 
     public static HandlesCommands create(Command command, String executable) {
@@ -20,22 +25,39 @@ public abstract class HandlesCommands {
             Class<?> _class = command.getCommandClass();
             Constructor<?> construct = _class.getConstructor(Command.class, String.class);
             Object __class = construct.newInstance(command, executable);
+=======
+
+    public static HandlesCommands create(Command command) {
+        try {
+            Class<?> _class = command.getCommandClass();
+            Constructor<?> construct = _class.getConstructor(Command.class);
+            Object __class = construct.newInstance(command);
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
             return (HandlesCommands) __class;
         } catch (Exception e) { e.printStackTrace(); }
         return null;
     }
 
     public String getName() {
+<<<<<<< HEAD
         return executable;
     }
 
     public HandlesCommands(Command command, String executable) {
         this.command = command;
         this.executable = executable;
+=======
+        return null;
+    }
+
+    public HandlesCommands(Command command) {
+        this.command = command;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
         availableArgs(this.availableArgs);
     }
 
     public void printHelp() {
+<<<<<<< HEAD
         if(__.isset(findFlag("-h")) || __.isset(findFlag("--help"))) {
             System.out.println("Usage: " + executable + " command [options] <value>");
             System.out.println("Options: \n");
@@ -57,14 +79,21 @@ public abstract class HandlesCommands {
         command.exit("<" + hint + "> is missing for this command.\n\n", 1);
         printHelp();
         return null;
+=======
+
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
     }
 
     protected Arg requiredFlag(String flag) {
         Arg arg = getFlagArg(flag);
         if(arg.isFlag() && hasFlag(flag) && ((arg.requiresValue() && !__.empty(flagValue(flag))) || !arg.requiresValue()))
             return arg;
+<<<<<<< HEAD
         command.exit("[--" + flag + "] is required for this command.\n\n", 1);
         printHelp();
+=======
+        command.exit("[--" + flag + "] is required for this command.", 1);
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
         return null;
     }
 
@@ -92,8 +121,12 @@ public abstract class HandlesCommands {
             if(i > 0) error += " | ";
             error += "--" + flags[i];
         }
+<<<<<<< HEAD
         error += "] One of these flags are required for this command.\n\n";
         printHelp();
+=======
+        error += "] One of these flags are required for this command.";
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
         command.exit(error, 1);
         return null;
     }
@@ -129,7 +162,11 @@ public abstract class HandlesCommands {
         return null;
     }
 
+<<<<<<< HEAD
     protected abstract String helpText();
+=======
+    protected abstract Help help();
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
     public abstract void run() throws Exception;
     public abstract void availableArgs(ArrayList<Arg> args);
 

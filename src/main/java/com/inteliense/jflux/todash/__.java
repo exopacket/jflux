@@ -507,7 +507,11 @@ public class __ {
     }
 
     public static String id() {
+<<<<<<< HEAD
         return id(String.valueOf(System.nanoTime()), hex(Rand.secure(32)), Rand.str(32, ""));
+=======
+        return id(String.valueOf(System.nanoTime()), hex(Rand.secure(32)), Rand.str(32));
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
     }
 
     public static String id(String... seeds) {

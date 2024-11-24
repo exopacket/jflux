@@ -11,7 +11,11 @@ public class Launcher {
         Arg[] argList = new Arg[0];
 
         if(args.length == 0) {
+<<<<<<< HEAD
             Help.getFromKeywords(keywords);
+=======
+            Help.getFromKeywords(keywords).print();
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
             System.exit(1);
         }
 
@@ -23,7 +27,11 @@ public class Launcher {
                     System.exit(code);
                 }
             };
+<<<<<<< HEAD
             container = HandlesCommands.create(cmd, args[0]);
+=======
+            container = HandlesCommands.create(cmd);
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
             argList = Parser.getArgs(args, keywords, container);
             container.parsedArgs(argList);
         } catch (Exception e) {

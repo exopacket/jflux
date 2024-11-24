@@ -46,9 +46,14 @@ public class Arg {
         this.value = value;
     }
 
+<<<<<<< HEAD
     public Arg setHelpText(String value) {
         this.helpText = value;
         return this;
+=======
+    public void setHelpText(String value) {
+        this.helpText = value;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
     }
 
     public boolean requiresValue() {
@@ -75,6 +80,7 @@ public class Arg {
         return this.value;
     }
 
+<<<<<<< HEAD
     public String getHelpText() {
         StringBuilder sb = new StringBuilder();
         sb.append("    ");
@@ -85,4 +91,6 @@ public class Arg {
         return sb.toString();
     }
 
+=======
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 }

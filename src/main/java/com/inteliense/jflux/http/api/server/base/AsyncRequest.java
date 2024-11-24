@@ -1,11 +1,19 @@
 package com.inteliense.jflux.http.api.server.base;
 
+<<<<<<< HEAD
 import com.inteliense.jflux.crypto.builtin.SHA;
 import com.inteliense.jflux.encoding.Hex;
+=======
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import com.inteliense.jflux.http.api.base.endpoints.InboundRequest;
 import com.inteliense.jflux.http.api.server.containers.APIResponse;
 import com.inteliense.jflux.http.api.server.containers.ClientSession;
 import com.inteliense.jflux.http.api.server.resources.APIResource;
+<<<<<<< HEAD
+=======
+import com.inteliense.jflux.http.api.utils.EncodingUtils;
+import com.inteliense.jflux.http.api.utils.SHA;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 
 import java.time.LocalDateTime;
 

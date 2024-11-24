@@ -9,7 +9,11 @@ import com.inteliense.jflux.http.api.server.resources.APIResource;
 import com.inteliense.jflux.http.api.server.resources.APIResources;
 import com.inteliense.jflux.http.api.server.types.APIServerType;
 import com.inteliense.jflux.http.api.server.types.ContentType;
+<<<<<<< HEAD
 import com.inteliense.jflux.output.json.JSON;
+=======
+import com.inteliense.jflux.http.api.utils.JSON;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import com.sun.net.httpserver.*;
 import org.json.simple.JSONObject;
 

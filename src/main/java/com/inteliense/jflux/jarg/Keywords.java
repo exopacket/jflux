@@ -1,7 +1,10 @@
 package com.inteliense.jflux.jarg;
 
+<<<<<<< HEAD
 import com.inteliense.jflux.todash.__;
 
+=======
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +13,7 @@ import java.util.HashMap;
 public class Keywords {
 
     private String pkg;
+<<<<<<< HEAD
     private String executable;
     private HashMap<Class<?>, String> commands = new HashMap<>();
     private ArrayList<Class<?>> required = new ArrayList<>();
@@ -26,6 +30,18 @@ public class Keywords {
         } else {
             commands.put(c, helpText);
         }
+=======
+    private ArrayList<Class<?>> commands = new ArrayList<>();
+    private ArrayList<Class<?>> required = new ArrayList<>();
+
+    public Keywords(String pkg) {
+        this.pkg = pkg;
+    }
+
+    public void register(boolean requiresValue, Class<?>... classes) {
+        for(Class<?> c : classes) commands.add(c);
+        if(requiresValue) for(Class<?> c : classes) required.add(c);
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
     }
 
     public Class getClass(String cmd) {
@@ -42,10 +58,14 @@ public class Keywords {
 
     public boolean exists(String cmd) {
         try {
+<<<<<<< HEAD
             boolean exits = false;
             for(Class<?> c : commands.keySet()) {
                 if(c.equals(getClass(cmd))) return true;
             }
+=======
+            return commands.contains(getClass(cmd));
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
         } catch (Exception ignored) { }
         return false;
     }
@@ -57,6 +77,7 @@ public class Keywords {
         return false;
     }
 
+<<<<<<< HEAD
     public String getExecutable() {
         return executable;
     }
@@ -69,5 +90,7 @@ public class Keywords {
         }
         return lines;
     }
+=======
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 
 }

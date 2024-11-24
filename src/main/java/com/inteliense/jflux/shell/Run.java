@@ -1,9 +1,20 @@
 package com.inteliense.jflux.shell;
 
+<<<<<<< HEAD
+=======
+import com.amazonaws.util.Platform;
+import com.inteliense.jflux.http.api.utils.Exec;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import com.inteliense.jflux.sys.PlatformUtils;
 import com.inteliense.jflux.threading.types.JoinedThread;
 import com.inteliense.jflux.todash.__;
 
+<<<<<<< HEAD
+=======
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 import java.util.ArrayList;
 
 public abstract class Run {
@@ -14,8 +25,15 @@ public abstract class Run {
         JoinedThread thread = new JoinedThread() {
             @Override
             protected boolean execute() {
+<<<<<<< HEAD
                 ArrayList<CommandGroup.Group> groups = group.get(PlatformUtils.getOsType());
                 for(CommandGroup.Group group : groups) {
+=======
+                System.out.println("EXECUTE");
+                ArrayList<CommandGroup.Group> groups = group.get(PlatformUtils.getOsType());
+                for(CommandGroup.Group group : groups) {
+                    System.out.println("group");
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
                     try {
                         String dir = group.getDirectory();
                         CommandGroup.Shell shell = group.getShell();
@@ -28,6 +46,10 @@ public abstract class Run {
                         e.printStackTrace();
                     }
                 }
+<<<<<<< HEAD
+=======
+                System.out.println("DONE");
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
                 return false;
             }
         };
@@ -54,6 +76,7 @@ public abstract class Run {
         }
     }
 
+<<<<<<< HEAD
     public static int runAndWait(String unixCmd, String windowsCmd, WindowsShell shell) {
         PlatformUtils.OpSys os = PlatformUtils.getOsType(false);
         if(os == PlatformUtils.OpSys.WINDOWS) {
@@ -83,6 +106,9 @@ public abstract class Run {
                 e.printStackTrace();
             }
         }
+=======
+    public static int runAndWait(String unixCmd, String windowsCmd, String powerShellCmd) {
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
         return -1;
     }
 
@@ -91,7 +117,11 @@ public abstract class Run {
     }
 
     public static class Linux {
+<<<<<<< HEAD
         public static String runAndWait(String cmd) {
+=======
+        public static String withOut(String cmd) {
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
             try {
                 ProcessBuilder pb = new ProcessBuilder("/bin/bash", "-c", cmd);
                 Process process = pb.start();

@@ -6,8 +6,14 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.server.config.JettyWebSocketServletContainerInitializer;
+<<<<<<< HEAD
 import org.json.simple.JSONObject;
 import com.inteliense.jflux.output.json.JSON;
+=======
+import com.inteliense.jflux.todash.__;
+import org.json.simple.JSONObject;
+import com.inteliense.jflux.json.JSON;
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
 
 import java.net.InetSocketAddress;
 import java.net.URI;
@@ -98,7 +104,11 @@ public abstract class WebSockServer
             session.disconnect();
             return null;
         }
+<<<<<<< HEAD
         String id = Rand.str(32, "");
+=======
+        String id = Rand.str(32);
+>>>>>>> 50fdb4c525291b03960283dca73966876f808659
         sessions.put(id, session);
         JSONObject obj = new JSONObject();
         obj.put("status", "connected");
