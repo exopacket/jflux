@@ -1,12 +1,13 @@
 package com.inteliense.jflux.http.api.server.impl;
 
-import com.inteliense.zeta.server.*;
-import com.inteliense.zeta.server.containers.ClientSession;
-import com.inteliense.zeta.server.containers.Parameters;
-import com.inteliense.zeta.server.containers.RequestHeaders;
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.resources.APIResource;
-import com.inteliense.zeta.server.types.ContentType;
+import com.inteliense.jflux.http.api.base.prereqs.ApiService;
+import com.inteliense.jflux.http.api.server.*;
+import com.inteliense.jflux.http.api.server.containers.ClientSession;
+import com.inteliense.jflux.http.api.server.containers.Parameters;
+import com.inteliense.jflux.http.api.server.containers.RequestHeaders;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.resources.APIResource;
+import com.inteliense.jflux.http.api.server.types.ContentType;
 
 import java.util.HashMap;
 
@@ -17,7 +18,6 @@ public interface APIMethods {
     APIKeyPair lookupApiKey(String apiKey);
     boolean lookupUserInfo(ClientSession session);
     HashMap<String, String> getParameters(String body, ContentType contentType);
-    void addToBlacklist(ClientSession clientSession, API.BlacklistEntryType entryType);
+    void addToBlacklist(ClientSession clientSession, ApiService.BlacklistEntryType entryType);
     void removeFromBlacklist(ClientSession clientSession);
-
 }

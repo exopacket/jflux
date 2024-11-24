@@ -4,6 +4,8 @@ import com.inteliense.jflux.exceptions.types.CommonIOException;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class FileObject {
 
@@ -11,9 +13,9 @@ public class FileObject {
     private File file = null;
     private byte[] data = new byte[0];
 
-    public FileObject(PathObject path) throws CommonIOException {
+    public FileObject(PathObject path, String filename) throws CommonIOException {
         this.path = path;
-        this.file = getNativeFile();
+        this.file = getNativeFile(filename);
     }
 
     public void readToEnd() {
@@ -50,17 +52,27 @@ public class FileObject {
     }
 
     public void overwrite(byte[] data) {
-
+        try {
+            PrintWriter pw = new PrintWriter(file);
+            for(int i=0; i<data.length; i++) {
+                pw.print((char) data[i]);
+            }
+            pw.close();
+            pw.flush();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void append(byte[] data) {
 
     }
 
-    private File getNativeFile() throws CommonIOException {
-        if(path.exists()) return new File(path.getUri());
+    private File getNativeFile(String filename) throws CommonIOException {
+        File nativeFile = new File(path.clone(filename).getString());
+        if(nativeFile.exists()) return nativeFile;
         else {
-            File file = new File(path.getUri());
+            File file = new File(path.clone(filename).getString());
             try {
                 file.createNewFile();
                 return file;
@@ -69,6 +81,10 @@ public class FileObject {
             }
         }
         return null;
+    }
+
+    public File getFile() {
+        return file;
     }
 
     private void e(ExceptionType type) throws CommonIOException {

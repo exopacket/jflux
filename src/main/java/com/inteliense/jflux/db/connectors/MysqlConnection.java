@@ -36,9 +36,9 @@ public class MysqlConnection extends DbConnection implements ExecutesQueries  {
     @Override
     protected void connect() throws Exception, CriticalException {
 
-        String jdbc = "jdbc:mysql://" + details.get("host").get() + ":" + details.get("port").get() + "/" + details.get("name").get();
+        String jdbc = "jdbc:mysql://" + details.get("host") + ":" + details.get("port") + "/" + details.get("name");
 
-        conn = DriverManager.getConnection(jdbc, details.get("username").get(), details.get("password").get());
+        conn = DriverManager.getConnection(jdbc, details.get("username"), details.get("password"));
         if(conn == null) throw new CriticalException("Failed to connect to mysql.");
 
     }
@@ -56,9 +56,19 @@ public class MysqlConnection extends DbConnection implements ExecutesQueries  {
     @Override
     public QueryResults execute(QueryParams p) {
 
+        if(conn == null) {
+            try {
+                connect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (CriticalException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
             SQLBuilder builder = new SQLBuilder(p);
-            String preparedSql = builder.getPreparedString();
+            String preparedSql = builder.getPreparedString(false);
             PreparedStatement stmt = conn.prepareStatement(preparedSql);
             for(int i=0;i< builder.valueSize(); i++) {
                 Object v = builder.next();
@@ -80,9 +90,19 @@ public class MysqlConnection extends DbConnection implements ExecutesQueries  {
     @Override
     public void executeUpdate(QueryParams p) {
 
+        if(conn == null) {
+            try {
+                connect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } catch (CriticalException e) {
+                e.printStackTrace();
+            }
+        }
+
         try {
             SQLBuilder builder = new SQLBuilder(p);
-            String preparedSql = builder.getPreparedString();
+            String preparedSql = builder.getPreparedString(false);
             PreparedStatement stmt = conn.prepareStatement(preparedSql);
             for(int i=0;i< builder.valueSize(); i++) {
                 Object v = builder.next();

@@ -1,8 +1,8 @@
 package com.inteliense.jflux.http.api.server.encryption;
 
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.RSA;
-import com.inteliense.zeta.utils.SHA;
+import com.inteliense.jflux.crypto.builtin.RSA;
+import com.inteliense.jflux.crypto.builtin.SHA;
+import com.inteliense.jflux.encoding.BaseX;
 
 import java.security.KeyPair;
 import java.security.PrivateKey;
@@ -88,7 +88,7 @@ public class ZeroTrustKeyPairs {
 
             this.privateKey = privateKey;
             byte[] bites = privateKey.getEncoded();
-            String base64 = EncodingUtils.getBase64(bites);
+            String base64 = BaseX.stringFrom64(bites);
             privateKeyId = SHA.getSha1(SHA.getHmac384(base64, apiSecret));
 
         }
@@ -97,7 +97,7 @@ public class ZeroTrustKeyPairs {
 
             this.publicKey = publicKey;
             byte[] bites = publicKey.getEncoded();
-            String base64 = EncodingUtils.getBase64(bites);
+            String base64 = BaseX.stringFrom64(bites);
             publicKeyId = SHA.getSha1(SHA.getHmac384(base64, apiSecret));
 
         }

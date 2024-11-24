@@ -1,9 +1,8 @@
 package com.inteliense.jflux.http.api.server.containers;
 
-import com.inteliense.zeta.server.containers.ClientSession;
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.JSON;
-import com.inteliense.zeta.utils.RSA;
+import com.inteliense.jflux.crypto.builtin.RSA;
+import com.inteliense.jflux.output.json.JSON;
+import com.inteliense.jflux.todash.__;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -103,7 +102,7 @@ public class Parameters {
     }
 
     public String[] getArr(String key, String delimiter) {
-        return EncodingUtils.splitStr(values.get(key), delimiter);
+        return __.split(values.get(key), delimiter);
     }
 
     public LocalDateTime getDateTimeFromTimestamp(String key) {
@@ -143,7 +142,7 @@ public class Parameters {
     }
 
     public String[] getArr(String key, String delimiter, JSONObject inputObj) {
-        return EncodingUtils.splitStr(((String) inputObj.get(key)), delimiter);
+        return __.split(((String) inputObj.get(key)), delimiter);
     }
 
     public LocalDateTime getDateTimeFromTimestamp(JSONObject inputObj, String key) {

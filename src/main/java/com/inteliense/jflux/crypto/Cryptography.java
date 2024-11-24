@@ -9,7 +9,7 @@ public class Cryptography {
     }
 
     //TODO connect cryptography
-    public byte[] encrypt(String algo, byte[] input, byte[] key, byte[]...aad) {
+    public byte[] encrypt(String algo, byte[] input, byte[] key, byte[] aad) {
         return null;
     }
 

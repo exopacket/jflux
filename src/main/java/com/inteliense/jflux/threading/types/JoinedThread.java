@@ -1,6 +1,6 @@
 package com.inteliense.jflux.threading.types;
 
-import org.extendedweb.aloft.server.base.threading.base.JoinsThread;
+import com.inteliense.jflux.threading.base.JoinsThread;
 
 public abstract class JoinedThread extends JoinsThread {
 

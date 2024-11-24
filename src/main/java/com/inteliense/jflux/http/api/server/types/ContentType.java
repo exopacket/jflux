@@ -7,5 +7,7 @@ public enum ContentType {
     JSON,
     UNKNOWN,
     CIPHERTEXT,
-    UNSET
+    UNSET,
+    URL_ENCODED,
+    FORM_DATA
 }

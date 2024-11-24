@@ -1,6 +1,6 @@
 package com.inteliense.jflux.http.api.server.containers;
 
-import com.inteliense.zeta.utils.EncodingUtils;
+import com.inteliense.jflux.todash.__;
 import com.sun.net.httpserver.Headers;
 
 import java.time.LocalDateTime;
@@ -73,7 +73,7 @@ public class RequestHeaders {
     }
 
     public String[] getArr(String key, String delimiter) {
-        return EncodingUtils.splitStr(values.get(key.toUpperCase()), delimiter);
+        return __.split(values.get(key.toUpperCase()), delimiter);
     }
 
     public LocalDateTime getDateTimeFromTimestamp(String key) {

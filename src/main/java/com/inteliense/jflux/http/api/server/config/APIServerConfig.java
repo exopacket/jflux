@@ -1,7 +1,7 @@
 package com.inteliense.jflux.http.api.server.config;
 
-import com.inteliense.zeta.server.types.CORSPolicy;
-import com.inteliense.zeta.server.types.APIServerType;
+import com.inteliense.jflux.http.api.server.types.CORSPolicy;
+import com.inteliense.jflux.http.api.server.types.APIServerType;
 
 import java.net.InetSocketAddress;
 

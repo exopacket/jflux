@@ -1,12 +1,12 @@
 package com.inteliense.jflux.http.api.server.containers;
 
-import com.inteliense.zeta.server.encryption.APIKeyPair;
-import com.inteliense.zeta.server.encryption.ZeroTrustKeyPairs;
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.server.types.APIServerType;
-import com.inteliense.zeta.utils.EncodingUtils;
-import com.inteliense.zeta.utils.Random;
-import com.inteliense.zeta.utils.SHA;
+import com.inteliense.jflux.crypto.Rand;
+import com.inteliense.jflux.crypto.builtin.SHA;
+import com.inteliense.jflux.encoding.Hex;
+import com.inteliense.jflux.http.api.server.encryption.APIKeyPair;
+import com.inteliense.jflux.http.api.server.encryption.ZeroTrustKeyPairs;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.server.types.APIServerType;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class APISession {
 
         if(isZeroTrust) {
             this.sessionId = createSessionId(ipAddr);
-            this.randomBytes = Random.secure(96);
+            this.randomBytes = Rand.secure(96);
             this.sessionAuth = createInitialSessionAuth();
             this.zeroTrustKeyPairs = new ZeroTrustKeyPairs(this.getApiKeys().getSecret());
         }
@@ -107,7 +107,7 @@ public class APISession {
     }
 
     public String getRandomBytes() {
-        return EncodingUtils.getHex(this.randomBytes);
+        return Hex.getHex(this.randomBytes);
     }
 
     public void newRequest() {
@@ -162,7 +162,7 @@ public class APISession {
 
         String apiSecret = apiKeys.getSecret();
         String value = ipAddr + ";" + apiSecret;
-        return SHA.getSha1(SHA.getHmac384(value, Random.secure(96)));
+        return SHA.getSha1(SHA.getHmac384(value, Rand.secure(96)));
 
     }
 

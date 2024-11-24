@@ -1,8 +1,6 @@
 package com.inteliense.jflux.db.connectors.details;
 
 import com.inteliense.jflux.db.supporting.DbType;
-import org.extendedweb.aloft.lib.lang.types.base.T;
-import org.extendedweb.aloft.lib.lang.types.base.V;
 
 import java.util.HashMap;
 
@@ -17,8 +15,8 @@ public abstract class DbConnectionDetails {
 
     protected abstract void build();
 
-    public V get(String key) {
-        if(!values.containsKey(key)) return V.nothing();
+    public <Any> Any get(String key) {
+        if(!values.containsKey(key)) return null;
         return values.get(key).get();
     }
 
@@ -26,22 +24,22 @@ public abstract class DbConnectionDetails {
         return type;
     }
 
-    protected void append(String key, T type, Object value) {
+    protected void append(String key, Class<?> type, Object value) {
         values.put(key, new DbDetailsPair(type, value));
     }
 
     public static class DbDetailsPair {
 
-        private T type;
+        private Class<?> type;
         private Object v;
 
-        public DbDetailsPair(T type, Object v) {
+        public DbDetailsPair(Class<?> type, Object v) {
             this.type = type;
             this.v = v;
         }
 
-        public V get() {
-            return type.value(v);
+        public <Any> Any get() {
+            return (Any) type.cast(v);
         }
 
     }

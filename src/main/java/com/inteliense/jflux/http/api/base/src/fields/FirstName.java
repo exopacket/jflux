@@ -1,8 +1,8 @@
 package com.inteliense.jflux.http.api.base.src.fields;
 
-import com.inteliense.zeta.api.models.ApiModelField;
-import com.inteliense.zeta.api.models.FieldAccess;
-import com.inteliense.zeta.api.models.FieldType;
+import com.inteliense.jflux.http.api.base.models.ApiModelField;
+import com.inteliense.jflux.http.api.base.models.FieldAccess;
+import com.inteliense.jflux.http.api.base.models.FieldType;
 
 public class FirstName extends ApiModelField {
     @Override

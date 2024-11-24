@@ -1,7 +1,8 @@
 package com.inteliense.jflux.http.api.base.models;
 
 public enum FieldType {
-    ID,
+    ID_AUTO_INT,
+    ID_STRING,
     STRING,
     LARGE_STRING,
     EXTRA_LARGE_STRING,
@@ -9,5 +10,5 @@ public enum FieldType {
     TIMESTAMP,
     DATE,
     TIME,
-
+    FOREIGN_ID
 }

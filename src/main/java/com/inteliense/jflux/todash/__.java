@@ -1,9 +1,15 @@
 package com.inteliense.jflux.todash;
 
+import com.inteliense.jflux.crypto.Rand;
+import com.inteliense.jflux.crypto.builtin.SHA;
 import com.inteliense.jflux.encoding.BaseX;
 import com.inteliense.jflux.encoding.Hex;
+import org.w3c.dom.Text;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class __ {
 
@@ -186,6 +192,12 @@ public class __ {
         return str;
     }
 
+    public static String classCase(String str) {
+        str = str.substring(0, 1).toUpperCase() + str.substring(1);
+        str = camelToSnake(str);
+        return snakeToClass(str);
+    }
+
     public static String camelToSnake(String str) {
         String regex = "([a-z])([A-Z]+)";
         String replacement = "$1_$2";
@@ -220,6 +232,10 @@ public class __ {
             builder.append(parts[i].substring(0, 1).toUpperCase()).append(parts[i].substring(1).toLowerCase());
         }
         return builder.toString();
+    }
+
+    public static String[] split(String input, String delimiter) {
+        return input.split(delimiter);
     }
 
     public static String hex(byte[] arr) {
@@ -288,6 +304,54 @@ public class __ {
 
         public LineCollection collection() {
             return new LineCollection();
+        }
+
+        public int interactiveList(String message, String...options) {
+            println(message);
+            for(int i=0; i< options.length; i++) {
+                int optNum = i + 1;
+                String opt = options[i];
+                print("[ " + optNum + " ] ➤ ", TextColor.GREEN);
+                println(opt);
+            }
+            String res = collect("Enter the number of your selection");
+            return Integer.parseInt(res);
+        }
+
+        public String collect(String prompt) {
+            print(prompt + " ➤ ", TextColor.PURPLE);
+            Scanner scnr = new Scanner(System.in);
+            return scnr.nextLine();
+        }
+
+        public String collect(String prompt, String defaultEntry) {
+            print(prompt, TextColor.PURPLE);
+            print(" [" + defaultEntry + "]");
+            print(" ➤ ", TextColor.PURPLE);
+            Scanner scnr = new Scanner(System.in);
+            String input = scnr.nextLine();
+            if(input.trim().isEmpty()) return defaultEntry;
+            return input;
+        }
+
+        public String collectSecure(String prompt) {
+            print(prompt, TextColor.PURPLE);
+            print(" ➤ ", TextColor.PURPLE);
+            char[] password = System.console().readPassword();
+            String input = new String(password);
+            return input;
+        }
+
+        public boolean confirm(String prompt) {
+            print(prompt, TextColor.PURPLE);
+            print(" [y/n]");
+            print(" ➤ ", TextColor.PURPLE);
+            Scanner scnr = new Scanner(System.in);
+            String line = scnr.nextLine().trim().toUpperCase();
+            boolean yes = line.equals("Y");
+            boolean no = line.equals("N");
+            if(!yes && !no) return confirm(prompt);
+            return yes;
         }
 
     }
@@ -397,6 +461,63 @@ public class __ {
 
     private static String ansiReset() {
         return "\u001B[0m";
+    }
+
+    //legacy
+    public static String str(Object input) {
+        return String.valueOf(input);
+    }
+
+    public static int num(Object input) throws Exception {
+        try {
+            return Integer.parseInt(str(input));
+        } catch (Exception e) { throw new Exception("Integer parse error."); }
+    }
+
+    public static double dbl(Object input) throws Exception {
+        try {
+            return Double.parseDouble(str(input));
+        } catch (Exception e) { throw new Exception("Double parse error."); }
+    }
+
+    public static void printPrettyLn(String output) {
+        console().println(output, TextColor.CYAN);
+    }
+
+    public static void printPrettyLn(String output, TextColor color) {
+        console().println(output, color);
+    }
+
+    public static String[] arr(String...vals) {
+        return vals;
+    }
+
+    public static byte[] bites(String str) {
+        final Pattern textPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$");
+        boolean isBase64 = textPattern.matcher(str).matches();
+        try {
+            byte[] arr = null;
+            if(isBase64) arr = BaseX.bytesFrom64(str);
+            if(arr == null) arr = Hex.fromHex(str);
+            if(arr == null) arr = str.getBytes(StandardCharsets.UTF_8);
+            return arr;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static String id() {
+        return id(String.valueOf(System.nanoTime()), hex(Rand.secure(32)), Rand.str(32, ""));
+    }
+
+    public static String id(String... seeds) {
+        String full = "";
+        for(int i=0; i< seeds.length; i++) {
+            if(i > 0) full += "_";
+            full += seeds[i];
+        }
+        full += String.valueOf(System.currentTimeMillis());
+        return Rand.randomCase(b64(SHA.Bites.getSha1(full)).replaceAll("[/=+]", ""));
     }
 
 }

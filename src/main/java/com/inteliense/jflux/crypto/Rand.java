@@ -33,7 +33,7 @@ public class Rand {
         return String.valueOf(letters.charAt(i));
 }
 
-    public static String str(int len) {
+    public static String str(int len, String prefix) {
 
         int leftLimit = 48;
         int rightLimit = 122;
@@ -47,7 +47,7 @@ public class Rand {
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
 
-        return generatedString;
+        return (prefix.isEmpty()) ? generatedString : prefix + "_" + generatedString;
 
     }
 

@@ -1,7 +1,13 @@
 package com.inteliense.jflux.http.api.client;
 
-import com.inteliense.zeta.types.ZeroTrustResponseType;
-import com.inteliense.zeta.utils.*;
+import com.inteliense.jflux.crypto.Rand;
+import com.inteliense.jflux.crypto.builtin.AES;
+import com.inteliense.jflux.crypto.builtin.RSA;
+import com.inteliense.jflux.crypto.builtin.SHA;
+import com.inteliense.jflux.encoding.Hex;
+import com.inteliense.jflux.http.api.types.ZeroTrustResponseType;
+import com.inteliense.jflux.http.api.utils.*;
+import com.inteliense.jflux.output.json.JSON;
 import org.json.simple.JSONObject;
 
 import java.security.PrivateKey;
@@ -94,23 +100,23 @@ public class ZETAResponse {
         String received = headers.getString("X-Api-Authorization");
         String iv = headers.getString("X-Api-Random-Bytes");
 
-        byte[] receivedCipherText = EncodingUtils.fromHex(received);
-        byte[] receivedIv = EncodingUtils.fromHex(iv);
-        byte[] calculatedHash = EncodingUtils.fromHex(SHA.getHmac512(secretKey, apiKey));
+        byte[] receivedCipherText = Hex.fromHex(received);
+        byte[] receivedIv = Hex.fromHex(iv);
+        byte[] calculatedHash = Hex.fromHex(SHA.getHmac512(secretKey, apiKey));
         byte[] actualCipherText = subtractBytes(receivedCipherText, calculatedHash);
-        byte[] decryptedSecretKeyBytes = AES.cbc(actualCipherText, EncodingUtils.fromHex(random), receivedIv, false);
+        byte[] decryptedSecretKeyBytes = AES.cbc(actualCipherText, Hex.fromHex(random), receivedIv, false);
         String decryptedSecretKey = new String(decryptedSecretKeyBytes);
         String secretKeyPrefix = (decryptedSecretKey.length() > 1) ? decryptedSecretKey.substring(0, 7) : "";
         if(!secretKeyPrefix.equals("secret_")) return false;
         String nextHash = SHA.getHmac512(decryptedSecretKey, apiKey);
-        String serverSecretKey = Random.str(56, "secret");
-        byte[] newIv = Random.generateIv(128);
-        byte[] nextSecretCipherText = AES.cbc(serverSecretKey.getBytes(), EncodingUtils.fromHex(random), newIv, true);
-        byte[] nextHashBytes = EncodingUtils.fromHex(nextHash);
+        String serverSecretKey = Rand.str(56, "secret");
+        byte[] newIv = Rand.generateIv(128);
+        byte[] nextSecretCipherText = AES.cbc(serverSecretKey.getBytes(), Hex.fromHex(random), newIv, true);
+        byte[] nextHashBytes = Hex.fromHex(nextHash);
         byte[] signingKey = addBytes(nextSecretCipherText, nextHashBytes);
         this.currentSecretKey = decryptedSecretKey;
-        this.nextAuthorization = EncodingUtils.getHex(signingKey);
-        this.nextIv = EncodingUtils.getHex(newIv);
+        this.nextAuthorization = Hex.getHex(signingKey);
+        this.nextIv = Hex.getHex(newIv);
         this.nextSecretKey = serverSecretKey;
 
         return true;

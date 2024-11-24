@@ -1,10 +1,14 @@
 package com.inteliense.jflux.http.api.client;
 
-import com.inteliense.zeta.server.exceptions.APIException;
-import com.inteliense.zeta.types.ZeroTrustRequestType;
-import com.inteliense.zeta.types.ZeroTrustResponseType;
-import com.inteliense.zeta.utils.*;
-import com.inteliense.zeta.utils.Random;
+import com.inteliense.jflux.crypto.Rand;
+import com.inteliense.jflux.crypto.builtin.AES;
+import com.inteliense.jflux.crypto.builtin.RSA;
+import com.inteliense.jflux.crypto.builtin.SHA;
+import com.inteliense.jflux.encoding.Hex;
+import com.inteliense.jflux.http.api.server.exceptions.APIException;
+import com.inteliense.jflux.http.api.types.ZeroTrustRequestType;
+import com.inteliense.jflux.http.api.types.ZeroTrustResponseType;
+import com.inteliense.jflux.output.json.JSON;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -257,7 +261,7 @@ public class ZETAClient {
         this.serverPublic = RSA.publicKeyFromStr((String) response.getData().get("server_public_key"));
         this.clientPrivate = RSA.privateKeyFromStr((String) response.getData().get("client_private_key"));
         this.keySetId = (String) response.getData().get("key_set_id");
-        this.keyTransferBytes = EncodingUtils.fromHex((String) response.getData().get("random_bytes"));
+        this.keyTransferBytes = Hex.fromHex((String) response.getData().get("random_bytes"));
 
         return true;
 
@@ -294,7 +298,7 @@ public class ZETAClient {
     }
 
     private String getRandomBytes(int len) {
-        return EncodingUtils.getHex(Random.secure(len));
+        return Hex.getHex(Rand.secure(len));
     }
 
     private String initialAuthorization(String randomBytes) {
@@ -302,10 +306,10 @@ public class ZETAClient {
         String aesKey = randomBytes.substring(0, 64);
         String aesIv = randomBytes.substring(64);
         String encryptedSecretKey = AES.HEX.cbc(this.activeSecret, aesKey, aesIv, true);
-        byte[] ciphertext = EncodingUtils.fromHex(encryptedSecretKey);
-        byte[] calculatedHash = EncodingUtils.fromHex(SHA.getHmac512(this.activeSecret, this.apiKey));
+        byte[] ciphertext = Hex.fromHex(encryptedSecretKey);
+        byte[] calculatedHash = Hex.fromHex(SHA.getHmac512(this.activeSecret, this.apiKey));
         byte[] encodedCiphertext = addBytes(ciphertext, calculatedHash);
-        return EncodingUtils.getHex(encodedCiphertext);
+        return Hex.getHex(encodedCiphertext);
 
     }
 

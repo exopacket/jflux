@@ -1,6 +1,7 @@
 package com.inteliense.jflux.threading.base;
 
-import org.extendedweb.aloft.utils.global.__;
+
+import com.inteliense.jflux.todash.__;
 
 import java.util.HashMap;
 

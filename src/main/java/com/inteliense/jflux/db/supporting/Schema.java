@@ -1,12 +1,13 @@
 package com.inteliense.jflux.db.supporting;
 
 import com.inteliense.jflux.db.Db;
-import org.extendedweb.aloft.utils.exceptions.types.CriticalException;
-import org.extendedweb.aloft.utils.global.__;
+import com.inteliense.jflux.exceptions.types.CriticalException;
+import com.inteliense.jflux.todash.__;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import com.inteliense.jflux.db.supporting.sql.Record;
 
 public class Schema {
 
@@ -95,7 +96,7 @@ public class Schema {
         if(__.isset(props.getColumnDefault())) sql += " DEFAULT '" + props.getColumnDefault() + "'";
         Statement stmt = conn(connection).createStatement();
         stmt.execute(sql);
-        __.printPrettyLn("Column '" + props.getName() + "' created successfully!", __.ANSI_PURPLE);
+        __.printPrettyLn("Column '" + props.getName() + "' created successfully!", __.TextColor.PURPLE);
         updates++;
     }
 
@@ -133,14 +134,14 @@ public class Schema {
                 connection.changeDb(db);
                 Statement stmt = conn(connection).createStatement();
                 stmt.executeUpdate("ALTER TABLE " + table + " DROP COLUMN " + properties.getName());
-                __.printPrettyLn("Column deleted successfully!", __.ANSI_PURPLE);
+                __.printPrettyLn("Column deleted successfully!", __.TextColor.PURPLE);
             }
             updates++;
             return;
         }
 
         Scanner scnr = new Scanner(System.in);
-        __.printPrettyLn("There are columns in your migration that are not present in the current schema.\nSelect how you would like to proceed with the migration.", __.ANSI_RED);
+        __.printPrettyLn("There are columns in your migration that are not present in the current schema.\nSelect how you would like to proceed with the migration.", __.TextColor.RED);
 
         for(int i=0; i< removals.size(); i++) {
             while(true) {
@@ -156,7 +157,7 @@ public class Schema {
                         __.printPrettyLn("Deleting column '" + removals.get(i).getName() + "' from table '" + table + "'..");
                         Statement stmt = conn(connection).createStatement();
                         stmt.executeUpdate("ALTER TABLE " + table + " DROP COLUMN " + removals.get(i).getName());
-                        __.printPrettyLn("Column deleted successfully!", __.ANSI_PURPLE);
+                        __.printPrettyLn("Column deleted successfully!", __.TextColor.PURPLE);
                     } else {
                         int index = selection - 1;
                         if(index >= replacements.size()) break;
@@ -164,7 +165,7 @@ public class Schema {
                         Statement stmt = conn(connection).createStatement();
                         stmt.executeUpdate("ALTER TABLE " + table + " RENAME COLUMN " + removals.get(i).getName() + " to " + replacements.get(index).getName());
                         replacements.remove(index);
-                        __.printPrettyLn("Column renamed successfully!", __.ANSI_PURPLE);
+                        __.printPrettyLn("Column renamed successfully!", __.TextColor.PURPLE);
                     }
                     updates++;
                 } catch (Exception ignored) { }
@@ -186,7 +187,7 @@ public class Schema {
             if(__.isset(passed.getColumnDefault())) sql += " DEFAULT '" + passed.getColumnDefault() + "'";
             Statement stmt = conn(connection).createStatement();
             stmt.executeUpdate(sql);
-            __.printPrettyLn("Column '" + passed.getName() + "' updated successfully!", __.ANSI_PURPLE);
+            __.printPrettyLn("Column '" + passed.getName() + "' updated successfully!", __.TextColor.PURPLE);
             updates++;
         }
     }
